@@ -1,0 +1,43 @@
+{
+  "schema_version": 1,
+  "applied_at": "2026-05-14",
+  "base_run_id": "sha256:8024e5a748922864465d043ab2f68f1b6cb547997c1d5d070768ad827fc6d6e9",
+  "base_printing_press_version": "4.6.1",
+  "patches": [
+    {
+      "id": "follow-up-boss-auth",
+      "summary": "Use Follow Up Boss Basic API-key auth, prefer stored OAuth bearer tokens, and add X-System headers.",
+      "reason": "Follow Up Boss requires Basic base64(api_key + ':') for API keys and supports optional integration headers.",
+      "files": [
+        "internal/config/config.go",
+        "internal/client/client.go",
+        "internal/cli/agent_context.go",
+        "manifest.json",
+        ".printing-press.json",
+        "README.md"
+      ],
+      "validated_outcome": "go test ./... covers Basic auth, bearer preference, and system header behavior."
+    },
+    {
+      "id": "oauth-helper-commands",
+      "summary": "Add auth oauth-url, auth oauth-token, and auth oauth-refresh commands.",
+      "reason": "Follow Up Boss OAuth needs form token exchange with HTTP Basic client authentication and token storage without printing raw token values.",
+      "files": [
+        "internal/cli/auth.go",
+        "internal/cli/auth_oauth_test.go"
+      ],
+      "validated_outcome": "go test ./... covers authorization URL generation and token exchange output redaction."
+    },
+    {
+      "id": "agent-crm",
+      "summary": "Add agent-crm local CRM reasoning commands for agenda, triage, next actions, gaps, quality, and context packs.",
+      "reason": "The public CLI needs agent-native CRM workflows beyond generated endpoint wrappers, using the local SQLite store as evidence.",
+      "files": [
+        "internal/cli/agent_crm.go",
+        "internal/cli/agent_crm_test.go",
+        "internal/cli/root.go"
+      ],
+      "validated_outcome": "go test ./... covers empty-store and fixture-backed agent-crm output shape."
+    }
+  ]
+}

@@ -1,0 +1,55 @@
+{
+  "manifest_version": "0.3",
+  "name": "follow-up-boss-pp-mcp",
+  "display_name": "Follow Up Boss",
+  "version": "4.6.1",
+  "description": "Follow Up Boss API surface as MCP tools.",
+  "author": {
+    "name": "CLI Printing Press"
+  },
+  "license": "Apache-2.0",
+  "server": {
+    "type": "binary",
+    "entry_point": "bin/follow-up-boss-pp-mcp",
+    "mcp_config": {
+      "command": "${__dirname}/bin/follow-up-boss-pp-mcp",
+      "args": [],
+      "env": {
+        "FUB_API_KEY": "${user_config.fub_api_key}",
+        "FUB_SYSTEM": "${user_config.fub_system}",
+        "FUB_SYSTEM_KEY": "${user_config.fub_system_key}"
+      }
+    }
+  },
+  "user_config": {
+    "fub_api_key": {
+      "type": "string",
+      "title": "FUB_API_KEY",
+      "description": "Sets FUB_API_KEY for the Follow Up Boss MCP server. Get a credential from https://docs.followupboss.com/reference/authentication.",
+      "sensitive": true,
+      "required": true
+    },
+    "fub_system": {
+      "type": "string",
+      "title": "FUB_SYSTEM",
+      "description": "Optional Follow Up Boss integration system name sent as X-System.",
+      "sensitive": false,
+      "required": false
+    },
+    "fub_system_key": {
+      "type": "string",
+      "title": "FUB_SYSTEM_KEY",
+      "description": "Optional Follow Up Boss integration system key sent as X-System-Key.",
+      "sensitive": true,
+      "required": false
+    }
+  },
+  "compatibility": {
+    "claude_desktop": ">=1.0.0",
+    "platforms": [
+      "darwin",
+      "linux",
+      "win32"
+    ]
+  }
+}

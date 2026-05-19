@@ -1,0 +1,4462 @@
+---
+openapi: 3.0.3
+info:
+  title: Follow Up Boss
+  version: 1.0.0
+  description: Docs-derived Follow Up Boss REST API spec for CLI Printing Press.
+  x-display-name: Follow Up Boss
+  x-cli-description: Agent-native CRM operations for Follow Up Boss.
+servers:
+- url: https://api.followupboss.com/v1
+security:
+- FUBApiKey: []
+components:
+  securitySchemes:
+    FUBApiKey:
+      type: apiKey
+      in: header
+      name: Authorization
+      x-auth-env-vars:
+      - FUB_API_KEY
+      x-auth-format: Basic {token}
+      x-auth-key-url: https://docs.followupboss.com/reference/authentication
+      x-auth-instructions: Use a Follow Up Boss API key; the printed CLI encodes it
+        as Basic key-colon auth.
+paths:
+  "/events":
+    get:
+      operationId: events_list
+      summary: GET /events
+      description: 'Follow Up Boss GET /events. Source: https://docs.followupboss.com/reference/getting-started'
+      tags:
+      - events
+      parameters:
+      - name: limit
+        in: query
+        required: false
+        schema:
+          type: integer
+        description: Maximum number of records to return
+      - name: offset
+        in: query
+        required: false
+        schema:
+          type: integer
+        description: Offset for paginated results
+      - name: updatedAfter
+        in: query
+        required: false
+        schema:
+          type: string
+        description: Return records updated after this timestamp
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json:
+              schema:
+                type: object
+        '400':
+          description: Bad request
+        '401':
+          description: Unauthorized
+        '404':
+          description: Not found
+    post:
+      operationId: events_create
+      summary: POST /events
+      description: 'Follow Up Boss POST /events. Source: https://docs.followupboss.com/reference/events-post'
+      tags:
+      - events
+      parameters: []
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json:
+              schema:
+                type: object
+        '400':
+          description: Bad request
+        '401':
+          description: Unauthorized
+        '404':
+          description: Not found
+      requestBody:
+        required: false
+        content:
+          application/json:
+            schema:
+              type: object
+              additionalProperties: true
+  "/events/{id}":
+    get:
+      operationId: events_get
+      summary: GET /events/{id}
+      description: 'Follow Up Boss GET /events/{id}. Source: https://docs.followupboss.com/reference/events-id-get'
+      tags:
+      - events
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+        description: id identifier
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json:
+              schema:
+                type: object
+        '400':
+          description: Bad request
+        '401':
+          description: Unauthorized
+        '404':
+          description: Not found
+  "/people":
+    get:
+      operationId: people_list
+      summary: GET /people
+      description: 'Follow Up Boss GET /people. Source: https://docs.followupboss.com/reference/people-get'
+      tags:
+      - people
+      parameters:
+      - name: limit
+        in: query
+        required: false
+        schema:
+          type: integer
+        description: Maximum number of records to return
+      - name: offset
+        in: query
+        required: false
+        schema:
+          type: integer
+        description: Offset for paginated results
+      - name: updatedAfter
+        in: query
+        required: false
+        schema:
+          type: string
+        description: Return records updated after this timestamp
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json:
+              schema:
+                type: object
+        '400':
+          description: Bad request
+        '401':
+          description: Unauthorized
+        '404':
+          description: Not found
+    post:
+      operationId: people_create
+      summary: POST /people
+      description: 'Follow Up Boss POST /people. Source: https://docs.followupboss.com/reference/people-post'
+      tags:
+      - people
+      parameters: []
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json:
+              schema:
+                type: object
+        '400':
+          description: Bad request
+        '401':
+          description: Unauthorized
+        '404':
+          description: Not found
+      requestBody:
+        required: false
+        content:
+          application/json:
+            schema:
+              type: object
+              additionalProperties: true
+  "/people/{id}":
+    get:
+      operationId: people_get
+      summary: GET /people/{id}
+      description: 'Follow Up Boss GET /people/{id}. Source: https://docs.followupboss.com/reference/people-id-get'
+      tags:
+      - people
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+        description: id identifier
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json:
+              schema:
+                type: object
+        '400':
+          description: Bad request
+        '401':
+          description: Unauthorized
+        '404':
+          description: Not found
+    put:
+      operationId: people_update
+      summary: PUT /people/{id}
+      description: 'Follow Up Boss PUT /people/{id}. Source: https://docs.followupboss.com/reference/people-id-put'
+      tags:
+      - people
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+        description: id identifier
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json:
+              schema:
+                type: object
+        '400':
+          description: Bad request
+        '401':
+          description: Unauthorized
+        '404':
+          description: Not found
+      requestBody:
+        required: false
+        content:
+          application/json:
+            schema:
+              type: object
+              additionalProperties: true
+    delete:
+      operationId: people_delete
+      summary: DELETE /people/{id}
+      description: 'Follow Up Boss DELETE /people/{id}. Source: https://docs.followupboss.com/reference/people-id-delete'
+      tags:
+      - people
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+        description: id identifier
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json:
+              schema:
+                type: object
+        '400':
+          description: Bad request
+        '401':
+          description: Unauthorized
+        '404':
+          description: Not found
+  "/people/checkDuplicate":
+    get:
+      operationId: people_checkDuplicate_list
+      summary: GET /people/checkDuplicate
+      description: 'Follow Up Boss GET /people/checkDuplicate. Source: https://docs.followupboss.com/reference/people-checkduplicate'
+      tags:
+      - people
+      parameters:
+      - name: limit
+        in: query
+        required: false
+        schema:
+          type: integer
+        description: Maximum number of records to return
+      - name: offset
+        in: query
+        required: false
+        schema:
+          type: integer
+        description: Offset for paginated results
+      - name: updatedAfter
+        in: query
+        required: false
+        schema:
+          type: string
+        description: Return records updated after this timestamp
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json:
+              schema:
+                type: object
+        '400':
+          description: Bad request
+        '401':
+          description: Unauthorized
+        '404':
+          description: Not found
+  "/people/unclaimed":
+    get:
+      operationId: people_unclaimed_list
+      summary: GET /people/unclaimed
+      description: 'Follow Up Boss GET /people/unclaimed. Source: https://docs.followupboss.com/reference/peopleunclaimed'
+      tags:
+      - people
+      parameters:
+      - name: limit
+        in: query
+        required: false
+        schema:
+          type: integer
+        description: Maximum number of records to return
+      - name: offset
+        in: query
+        required: false
+        schema:
+          type: integer
+        description: Offset for paginated results
+      - name: updatedAfter
+        in: query
+        required: false
+        schema:
+          type: string
+        description: Return records updated after this timestamp
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json:
+              schema:
+                type: object
+        '400':
+          description: Bad request
+        '401':
+          description: Unauthorized
+        '404':
+          description: Not found
+  "/people/claim":
+    post:
+      operationId: people_claim_create
+      summary: POST /people/claim
+      description: 'Follow Up Boss POST /people/claim. Source: https://docs.followupboss.com/reference/people-claim'
+      tags:
+      - people
+      parameters: []
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json:
+              schema:
+                type: object
+        '400':
+          description: Bad request
+        '401':
+          description: Unauthorized
+        '404':
+          description: Not found
+      requestBody:
+        required: false
+        content:
+          application/json:
+            schema:
+              type: object
+              additionalProperties: true
+  "/people/ignoreUnclaimed":
+    post:
+      operationId: people_ignoreUnclaimed_create
+      summary: POST /people/ignoreUnclaimed
+      description: 'Follow Up Boss POST /people/ignoreUnclaimed. Source: https://docs.followupboss.com/reference/people-ignoreunclaimed'
+      tags:
+      - people
+      parameters: []
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json:
+              schema:
+                type: object
+        '400':
+          description: Bad request
+        '401':
+          description: Unauthorized
+        '404':
+          description: Not found
+      requestBody:
+        required: false
+        content:
+          application/json:
+            schema:
+              type: object
+              additionalProperties: true
+  "/personAttachments":
+    post:
+      operationId: personAttachments_create
+      summary: POST /personAttachments
+      description: 'Follow Up Boss POST /personAttachments. Source: https://docs.followupboss.com/reference/personattachments-post'
+      tags:
+      - personAttachments
+      parameters: []
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json:
+              schema:
+                type: object
+        '400':
+          description: Bad request
+        '401':
+          description: Unauthorized
+        '404':
+          description: Not found
+      requestBody:
+        required: false
+        content:
+          application/json:
+            schema:
+              type: object
+              additionalProperties: true
+  "/personAttachments/{id}":
+    get:
+      operationId: personAttachments_get
+      summary: GET /personAttachments/{id}
+      description: 'Follow Up Boss GET /personAttachments/{id}. Source: https://docs.followupboss.com/reference/personattachments-id-get'
+      tags:
+      - personAttachments
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+        description: id identifier
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json:
+              schema:
+                type: object
+        '400':
+          description: Bad request
+        '401':
+          description: Unauthorized
+        '404':
+          description: Not found
+    put:
+      operationId: personAttachments_update
+      summary: PUT /personAttachments/{id}
+      description: 'Follow Up Boss PUT /personAttachments/{id}. Source: https://docs.followupboss.com/reference/personattachments-id-put'
+      tags:
+      - personAttachments
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+        description: id identifier
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json:
+              schema:
+                type: object
+        '400':
+          description: Bad request
+        '401':
+          description: Unauthorized
+        '404':
+          description: Not found
+      requestBody:
+        required: false
+        content:
+          application/json:
+            schema:
+              type: object
+              additionalProperties: true
+    delete:
+      operationId: personAttachments_delete
+      summary: DELETE /personAttachments/{id}
+      description: 'Follow Up Boss DELETE /personAttachments/{id}. Source: https://docs.followupboss.com/reference/personattachments-id-delete'
+      tags:
+      - personAttachments
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+        description: id identifier
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json:
+              schema:
+                type: object
+        '400':
+          description: Bad request
+        '401':
+          description: Unauthorized
+        '404':
+          description: Not found
+  "/peopleRelationships":
+    get:
+      operationId: peopleRelationships_list
+      summary: GET /peopleRelationships
+      description: 'Follow Up Boss GET /peopleRelationships. Source: https://docs.followupboss.com/reference/peoplerelationships'
+      tags:
+      - peopleRelationships
+      parameters:
+      - name: limit
+        in: query
+        required: false
+        schema:
+          type: integer
+        description: Maximum number of records to return
+      - name: offset
+        in: query
+        required: false
+        schema:
+          type: integer
+        description: Offset for paginated results
+      - name: updatedAfter
+        in: query
+        required: false
+        schema:
+          type: string
+        description: Return records updated after this timestamp
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json:
+              schema:
+                type: object
+        '400':
+          description: Bad request
+        '401':
+          description: Unauthorized
+        '404':
+          description: Not found
+    post:
+      operationId: peopleRelationships_create
+      summary: POST /peopleRelationships
+      description: 'Follow Up Boss POST /peopleRelationships. Source: https://docs.followupboss.com/reference/peoplerelationships-post'
+      tags:
+      - peopleRelationships
+      parameters: []
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json:
+              schema:
+                type: object
+        '400':
+          description: Bad request
+        '401':
+          description: Unauthorized
+        '404':
+          description: Not found
+      requestBody:
+        required: false
+        content:
+          application/json:
+            schema:
+              type: object
+              additionalProperties: true
+  "/peopleRelationships/{id}":
+    get:
+      operationId: peopleRelationships_get
+      summary: GET /peopleRelationships/{id}
+      description: 'Follow Up Boss GET /peopleRelationships/{id}. Source: https://docs.followupboss.com/reference/peoplerelationships-id-get'
+      tags:
+      - peopleRelationships
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+        description: id identifier
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json:
+              schema:
+                type: object
+        '400':
+          description: Bad request
+        '401':
+          description: Unauthorized
+        '404':
+          description: Not found
+    put:
+      operationId: peopleRelationships_update
+      summary: PUT /peopleRelationships/{id}
+      description: 'Follow Up Boss PUT /peopleRelationships/{id}. Source: https://docs.followupboss.com/reference/peoplerelationships-id-put'
+      tags:
+      - peopleRelationships
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+        description: id identifier
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json:
+              schema:
+                type: object
+        '400':
+          description: Bad request
+        '401':
+          description: Unauthorized
+        '404':
+          description: Not found
+      requestBody:
+        required: false
+        content:
+          application/json:
+            schema:
+              type: object
+              additionalProperties: true
+    delete:
+      operationId: peopleRelationships_delete
+      summary: DELETE /peopleRelationships/{id}
+      description: 'Follow Up Boss DELETE /peopleRelationships/{id}. Source: https://docs.followupboss.com/reference/peoplerelationships-id-delete'
+      tags:
+      - peopleRelationships
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+        description: id identifier
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json:
+              schema:
+                type: object
+        '400':
+          description: Bad request
+        '401':
+          description: Unauthorized
+        '404':
+          description: Not found
+  "/identity":
+    get:
+      operationId: identity_list
+      summary: GET /identity
+      description: 'Follow Up Boss GET /identity. Source: https://docs.followupboss.com/reference/identity'
+      tags:
+      - identity
+      parameters:
+      - name: limit
+        in: query
+        required: false
+        schema:
+          type: integer
+        description: Maximum number of records to return
+      - name: offset
+        in: query
+        required: false
+        schema:
+          type: integer
+        description: Offset for paginated results
+      - name: updatedAfter
+        in: query
+        required: false
+        schema:
+          type: string
+        description: Return records updated after this timestamp
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json:
+              schema:
+                type: object
+        '400':
+          description: Bad request
+        '401':
+          description: Unauthorized
+        '404':
+          description: Not found
+  "/notes":
+    post:
+      operationId: notes_create
+      summary: POST /notes
+      description: 'Follow Up Boss POST /notes. Source: https://docs.followupboss.com/reference/notes-post'
+      tags:
+      - notes
+      parameters: []
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json:
+              schema:
+                type: object
+        '400':
+          description: Bad request
+        '401':
+          description: Unauthorized
+        '404':
+          description: Not found
+      requestBody:
+        required: false
+        content:
+          application/json:
+            schema:
+              type: object
+              additionalProperties: true
+  "/notes/{id}":
+    get:
+      operationId: notes_get
+      summary: GET /notes/{id}
+      description: 'Follow Up Boss GET /notes/{id}. Source: https://docs.followupboss.com/reference/notes-id-get'
+      tags:
+      - notes
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+        description: id identifier
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json:
+              schema:
+                type: object
+        '400':
+          description: Bad request
+        '401':
+          description: Unauthorized
+        '404':
+          description: Not found
+    put:
+      operationId: notes_update
+      summary: PUT /notes/{id}
+      description: 'Follow Up Boss PUT /notes/{id}. Source: https://docs.followupboss.com/reference/notes-id-put'
+      tags:
+      - notes
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+        description: id identifier
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json:
+              schema:
+                type: object
+        '400':
+          description: Bad request
+        '401':
+          description: Unauthorized
+        '404':
+          description: Not found
+      requestBody:
+        required: false
+        content:
+          application/json:
+            schema:
+              type: object
+              additionalProperties: true
+    delete:
+      operationId: notes_delete
+      summary: DELETE /notes/{id}
+      description: 'Follow Up Boss DELETE /notes/{id}. Source: https://docs.followupboss.com/reference/notes-id-delete'
+      tags:
+      - notes
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+        description: id identifier
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json:
+              schema:
+                type: object
+        '400':
+          description: Bad request
+        '401':
+          description: Unauthorized
+        '404':
+          description: Not found
+  "/calls":
+    get:
+      operationId: calls_list
+      summary: GET /calls
+      description: 'Follow Up Boss GET /calls. Source: https://docs.followupboss.com/reference/calls-get'
+      tags:
+      - calls
+      parameters:
+      - name: limit
+        in: query
+        required: false
+        schema:
+          type: integer
+        description: Maximum number of records to return
+      - name: offset
+        in: query
+        required: false
+        schema:
+          type: integer
+        description: Offset for paginated results
+      - name: updatedAfter
+        in: query
+        required: false
+        schema:
+          type: string
+        description: Return records updated after this timestamp
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json:
+              schema:
+                type: object
+        '400':
+          description: Bad request
+        '401':
+          description: Unauthorized
+        '404':
+          description: Not found
+    post:
+      operationId: calls_create
+      summary: POST /calls
+      description: 'Follow Up Boss POST /calls. Source: https://docs.followupboss.com/reference/calls-post'
+      tags:
+      - calls
+      parameters: []
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json:
+              schema:
+                type: object
+        '400':
+          description: Bad request
+        '401':
+          description: Unauthorized
+        '404':
+          description: Not found
+      requestBody:
+        required: false
+        content:
+          application/json:
+            schema:
+              type: object
+              additionalProperties: true
+  "/calls/{id}":
+    get:
+      operationId: calls_get
+      summary: GET /calls/{id}
+      description: 'Follow Up Boss GET /calls/{id}. Source: https://docs.followupboss.com/reference/calls-id-get'
+      tags:
+      - calls
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+        description: id identifier
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json:
+              schema:
+                type: object
+        '400':
+          description: Bad request
+        '401':
+          description: Unauthorized
+        '404':
+          description: Not found
+    put:
+      operationId: calls_update
+      summary: PUT /calls/{id}
+      description: 'Follow Up Boss PUT /calls/{id}. Source: https://docs.followupboss.com/reference/calls-id-put'
+      tags:
+      - calls
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+        description: id identifier
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json:
+              schema:
+                type: object
+        '400':
+          description: Bad request
+        '401':
+          description: Unauthorized
+        '404':
+          description: Not found
+      requestBody:
+        required: false
+        content:
+          application/json:
+            schema:
+              type: object
+              additionalProperties: true
+  "/textMessages":
+    get:
+      operationId: textMessages_list
+      summary: GET /textMessages
+      description: 'Follow Up Boss GET /textMessages. Source: https://docs.followupboss.com/reference/textmessages-get'
+      tags:
+      - textMessages
+      parameters:
+      - name: limit
+        in: query
+        required: false
+        schema:
+          type: integer
+        description: Maximum number of records to return
+      - name: offset
+        in: query
+        required: false
+        schema:
+          type: integer
+        description: Offset for paginated results
+      - name: updatedAfter
+        in: query
+        required: false
+        schema:
+          type: string
+        description: Return records updated after this timestamp
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json:
+              schema:
+                type: object
+        '400':
+          description: Bad request
+        '401':
+          description: Unauthorized
+        '404':
+          description: Not found
+    post:
+      operationId: textMessages_create
+      summary: POST /textMessages
+      description: 'Follow Up Boss POST /textMessages. Source: https://docs.followupboss.com/reference/textmessages-post'
+      tags:
+      - textMessages
+      parameters: []
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json:
+              schema:
+                type: object
+        '400':
+          description: Bad request
+        '401':
+          description: Unauthorized
+        '404':
+          description: Not found
+      requestBody:
+        required: false
+        content:
+          application/json:
+            schema:
+              type: object
+              additionalProperties: true
+  "/textMessages/{id}":
+    get:
+      operationId: textMessages_get
+      summary: GET /textMessages/{id}
+      description: 'Follow Up Boss GET /textMessages/{id}. Source: https://docs.followupboss.com/reference/textmessages-id-get'
+      tags:
+      - textMessages
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+        description: id identifier
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json:
+              schema:
+                type: object
+        '400':
+          description: Bad request
+        '401':
+          description: Unauthorized
+        '404':
+          description: Not found
+  "/users":
+    get:
+      operationId: users_list
+      summary: GET /users
+      description: 'Follow Up Boss GET /users. Source: https://docs.followupboss.com/reference/users-get'
+      tags:
+      - users
+      parameters:
+      - name: limit
+        in: query
+        required: false
+        schema:
+          type: integer
+        description: Maximum number of records to return
+      - name: offset
+        in: query
+        required: false
+        schema:
+          type: integer
+        description: Offset for paginated results
+      - name: updatedAfter
+        in: query
+        required: false
+        schema:
+          type: string
+        description: Return records updated after this timestamp
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json:
+              schema:
+                type: object
+        '400':
+          description: Bad request
+        '401':
+          description: Unauthorized
+        '404':
+          description: Not found
+  "/users/{id}":
+    get:
+      operationId: users_get
+      summary: GET /users/{id}
+      description: 'Follow Up Boss GET /users/{id}. Source: https://docs.followupboss.com/reference/users-id-get'
+      tags:
+      - users
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+        description: id identifier
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json:
+              schema:
+                type: object
+        '400':
+          description: Bad request
+        '401':
+          description: Unauthorized
+        '404':
+          description: Not found
+    delete:
+      operationId: users_delete
+      summary: DELETE /users/{id}
+      description: 'Follow Up Boss DELETE /users/{id}. Source: https://docs.followupboss.com/reference/users-id-delete'
+      tags:
+      - users
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+        description: id identifier
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json:
+              schema:
+                type: object
+        '400':
+          description: Bad request
+        '401':
+          description: Unauthorized
+        '404':
+          description: Not found
+  "/me":
+    get:
+      operationId: me_list
+      summary: GET /me
+      description: 'Follow Up Boss GET /me. Source: https://docs.followupboss.com/reference/me'
+      tags:
+      - me
+      parameters:
+      - name: limit
+        in: query
+        required: false
+        schema:
+          type: integer
+        description: Maximum number of records to return
+      - name: offset
+        in: query
+        required: false
+        schema:
+          type: integer
+        description: Offset for paginated results
+      - name: updatedAfter
+        in: query
+        required: false
+        schema:
+          type: string
+        description: Return records updated after this timestamp
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json:
+              schema:
+                type: object
+        '400':
+          description: Bad request
+        '401':
+          description: Unauthorized
+        '404':
+          description: Not found
+  "/smartLists":
+    get:
+      operationId: smartLists_list
+      summary: GET /smartLists
+      description: 'Follow Up Boss GET /smartLists. Source: https://docs.followupboss.com/reference/smartlists-get'
+      tags:
+      - smartLists
+      parameters:
+      - name: limit
+        in: query
+        required: false
+        schema:
+          type: integer
+        description: Maximum number of records to return
+      - name: offset
+        in: query
+        required: false
+        schema:
+          type: integer
+        description: Offset for paginated results
+      - name: updatedAfter
+        in: query
+        required: false
+        schema:
+          type: string
+        description: Return records updated after this timestamp
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json:
+              schema:
+                type: object
+        '400':
+          description: Bad request
+        '401':
+          description: Unauthorized
+        '404':
+          description: Not found
+  "/smartLists/{id}":
+    get:
+      operationId: smartLists_get
+      summary: GET /smartLists/{id}
+      description: 'Follow Up Boss GET /smartLists/{id}. Source: https://docs.followupboss.com/reference/smartlist-id-get'
+      tags:
+      - smartLists
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+        description: id identifier
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json:
+              schema:
+                type: object
+        '400':
+          description: Bad request
+        '401':
+          description: Unauthorized
+        '404':
+          description: Not found
+  "/actionPlans":
+    get:
+      operationId: actionPlans_list
+      summary: GET /actionPlans
+      description: 'Follow Up Boss GET /actionPlans. Source: https://docs.followupboss.com/reference/actionplans-get'
+      tags:
+      - actionPlans
+      parameters:
+      - name: limit
+        in: query
+        required: false
+        schema:
+          type: integer
+        description: Maximum number of records to return
+      - name: offset
+        in: query
+        required: false
+        schema:
+          type: integer
+        description: Offset for paginated results
+      - name: updatedAfter
+        in: query
+        required: false
+        schema:
+          type: string
+        description: Return records updated after this timestamp
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json:
+              schema:
+                type: object
+        '400':
+          description: Bad request
+        '401':
+          description: Unauthorized
+        '404':
+          description: Not found
+  "/actionPlansPeople":
+    get:
+      operationId: actionPlansPeople_list
+      summary: GET /actionPlansPeople
+      description: 'Follow Up Boss GET /actionPlansPeople. Source: https://docs.followupboss.com/reference/actionplanspeople-get'
+      tags:
+      - actionPlansPeople
+      parameters:
+      - name: limit
+        in: query
+        required: false
+        schema:
+          type: integer
+        description: Maximum number of records to return
+      - name: offset
+        in: query
+        required: false
+        schema:
+          type: integer
+        description: Offset for paginated results
+      - name: updatedAfter
+        in: query
+        required: false
+        schema:
+          type: string
+        description: Return records updated after this timestamp
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json:
+              schema:
+                type: object
+        '400':
+          description: Bad request
+        '401':
+          description: Unauthorized
+        '404':
+          description: Not found
+    post:
+      operationId: actionPlansPeople_create
+      summary: POST /actionPlansPeople
+      description: 'Follow Up Boss POST /actionPlansPeople. Source: https://docs.followupboss.com/reference/actionplanspeople-post'
+      tags:
+      - actionPlansPeople
+      parameters: []
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json:
+              schema:
+                type: object
+        '400':
+          description: Bad request
+        '401':
+          description: Unauthorized
+        '404':
+          description: Not found
+      requestBody:
+        required: false
+        content:
+          application/json:
+            schema:
+              type: object
+              additionalProperties: true
+  "/actionPlansPeople/{id}":
+    put:
+      operationId: actionPlansPeople_update
+      summary: PUT /actionPlansPeople/{id}
+      description: 'Follow Up Boss PUT /actionPlansPeople/{id}. Source: https://docs.followupboss.com/reference/actionplanspeople-id-put'
+      tags:
+      - actionPlansPeople
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+        description: id identifier
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json:
+              schema:
+                type: object
+        '400':
+          description: Bad request
+        '401':
+          description: Unauthorized
+        '404':
+          description: Not found
+      requestBody:
+        required: false
+        content:
+          application/json:
+            schema:
+              type: object
+              additionalProperties: true
+  "/automations":
+    get:
+      operationId: automations_list
+      summary: GET /automations
+      description: 'Follow Up Boss GET /automations. Source: https://docs.followupboss.com/reference/automations'
+      tags:
+      - automations
+      parameters:
+      - name: limit
+        in: query
+        required: false
+        schema:
+          type: integer
+        description: Maximum number of records to return
+      - name: offset
+        in: query
+        required: false
+        schema:
+          type: integer
+        description: Offset for paginated results
+      - name: updatedAfter
+        in: query
+        required: false
+        schema:
+          type: string
+        description: Return records updated after this timestamp
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json:
+              schema:
+                type: object
+        '400':
+          description: Bad request
+        '401':
+          description: Unauthorized
+        '404':
+          description: Not found
+  "/automations/{id}":
+    get:
+      operationId: automations_get
+      summary: GET /automations/{id}
+      description: 'Follow Up Boss GET /automations/{id}. Source: https://docs.followupboss.com/reference/automationsid'
+      tags:
+      - automations
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+        description: id identifier
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json:
+              schema:
+                type: object
+        '400':
+          description: Bad request
+        '401':
+          description: Unauthorized
+        '404':
+          description: Not found
+  "/automationsPeople":
+    get:
+      operationId: automationsPeople_list
+      summary: GET /automationsPeople
+      description: 'Follow Up Boss GET /automationsPeople. Source: https://docs.followupboss.com/reference/automationspeople'
+      tags:
+      - automationsPeople
+      parameters:
+      - name: limit
+        in: query
+        required: false
+        schema:
+          type: integer
+        description: Maximum number of records to return
+      - name: offset
+        in: query
+        required: false
+        schema:
+          type: integer
+        description: Offset for paginated results
+      - name: updatedAfter
+        in: query
+        required: false
+        schema:
+          type: string
+        description: Return records updated after this timestamp
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json:
+              schema:
+                type: object
+        '400':
+          description: Bad request
+        '401':
+          description: Unauthorized
+        '404':
+          description: Not found
+    post:
+      operationId: automationsPeople_create
+      summary: POST /automationsPeople
+      description: 'Follow Up Boss POST /automationsPeople. Source: https://docs.followupboss.com/reference/automationspeople-1'
+      tags:
+      - automationsPeople
+      parameters: []
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json:
+              schema:
+                type: object
+        '400':
+          description: Bad request
+        '401':
+          description: Unauthorized
+        '404':
+          description: Not found
+      requestBody:
+        required: false
+        content:
+          application/json:
+            schema:
+              type: object
+              additionalProperties: true
+  "/automationsPeople/{id}":
+    get:
+      operationId: automationsPeople_get
+      summary: GET /automationsPeople/{id}
+      description: 'Follow Up Boss GET /automationsPeople/{id}. Source: https://docs.followupboss.com/reference/automationspeopleid-1'
+      tags:
+      - automationsPeople
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+        description: id identifier
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json:
+              schema:
+                type: object
+        '400':
+          description: Bad request
+        '401':
+          description: Unauthorized
+        '404':
+          description: Not found
+    put:
+      operationId: automationsPeople_update
+      summary: PUT /automationsPeople/{id}
+      description: 'Follow Up Boss PUT /automationsPeople/{id}. Source: https://docs.followupboss.com/reference/automationspeopleid'
+      tags:
+      - automationsPeople
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+        description: id identifier
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json:
+              schema:
+                type: object
+        '400':
+          description: Bad request
+        '401':
+          description: Unauthorized
+        '404':
+          description: Not found
+      requestBody:
+        required: false
+        content:
+          application/json:
+            schema:
+              type: object
+              additionalProperties: true
+  "/templates":
+    get:
+      operationId: templates_list
+      summary: GET /templates
+      description: 'Follow Up Boss GET /templates. Source: https://docs.followupboss.com/reference/templates-get'
+      tags:
+      - templates
+      parameters:
+      - name: limit
+        in: query
+        required: false
+        schema:
+          type: integer
+        description: Maximum number of records to return
+      - name: offset
+        in: query
+        required: false
+        schema:
+          type: integer
+        description: Offset for paginated results
+      - name: updatedAfter
+        in: query
+        required: false
+        schema:
+          type: string
+        description: Return records updated after this timestamp
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json:
+              schema:
+                type: object
+        '400':
+          description: Bad request
+        '401':
+          description: Unauthorized
+        '404':
+          description: Not found
+    post:
+      operationId: templates_create
+      summary: POST /templates
+      description: 'Follow Up Boss POST /templates. Source: https://docs.followupboss.com/reference/templates-post'
+      tags:
+      - templates
+      parameters: []
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json:
+              schema:
+                type: object
+        '400':
+          description: Bad request
+        '401':
+          description: Unauthorized
+        '404':
+          description: Not found
+      requestBody:
+        required: false
+        content:
+          application/json:
+            schema:
+              type: object
+              additionalProperties: true
+  "/templates/{id}":
+    get:
+      operationId: templates_get
+      summary: GET /templates/{id}
+      description: 'Follow Up Boss GET /templates/{id}. Source: https://docs.followupboss.com/reference/templates-id-get'
+      tags:
+      - templates
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+        description: id identifier
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json:
+              schema:
+                type: object
+        '400':
+          description: Bad request
+        '401':
+          description: Unauthorized
+        '404':
+          description: Not found
+    put:
+      operationId: templates_update
+      summary: PUT /templates/{id}
+      description: 'Follow Up Boss PUT /templates/{id}. Source: https://docs.followupboss.com/reference/templates-id-put'
+      tags:
+      - templates
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+        description: id identifier
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json:
+              schema:
+                type: object
+        '400':
+          description: Bad request
+        '401':
+          description: Unauthorized
+        '404':
+          description: Not found
+      requestBody:
+        required: false
+        content:
+          application/json:
+            schema:
+              type: object
+              additionalProperties: true
+    delete:
+      operationId: templates_delete
+      summary: DELETE /templates/{id}
+      description: 'Follow Up Boss DELETE /templates/{id}. Source: https://docs.followupboss.com/reference/templates-id-delete'
+      tags:
+      - templates
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+        description: id identifier
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json:
+              schema:
+                type: object
+        '400':
+          description: Bad request
+        '401':
+          description: Unauthorized
+        '404':
+          description: Not found
+  "/templates/merge":
+    post:
+      operationId: templates_merge_create
+      summary: POST /templates/merge
+      description: 'Follow Up Boss POST /templates/merge. Source: https://docs.followupboss.com/reference/templates-merge'
+      tags:
+      - templates
+      parameters: []
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json:
+              schema:
+                type: object
+        '400':
+          description: Bad request
+        '401':
+          description: Unauthorized
+        '404':
+          description: Not found
+      requestBody:
+        required: false
+        content:
+          application/json:
+            schema:
+              type: object
+              additionalProperties: true
+  "/textMessageTemplates":
+    get:
+      operationId: textMessageTemplates_list
+      summary: GET /textMessageTemplates
+      description: 'Follow Up Boss GET /textMessageTemplates. Source: https://docs.followupboss.com/reference/textmessagetemplates-get'
+      tags:
+      - textMessageTemplates
+      parameters:
+      - name: limit
+        in: query
+        required: false
+        schema:
+          type: integer
+        description: Maximum number of records to return
+      - name: offset
+        in: query
+        required: false
+        schema:
+          type: integer
+        description: Offset for paginated results
+      - name: updatedAfter
+        in: query
+        required: false
+        schema:
+          type: string
+        description: Return records updated after this timestamp
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json:
+              schema:
+                type: object
+        '400':
+          description: Bad request
+        '401':
+          description: Unauthorized
+        '404':
+          description: Not found
+    post:
+      operationId: textMessageTemplates_create
+      summary: POST /textMessageTemplates
+      description: 'Follow Up Boss POST /textMessageTemplates. Source: https://docs.followupboss.com/reference/textmessagetemplates-post'
+      tags:
+      - textMessageTemplates
+      parameters: []
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json:
+              schema:
+                type: object
+        '400':
+          description: Bad request
+        '401':
+          description: Unauthorized
+        '404':
+          description: Not found
+      requestBody:
+        required: false
+        content:
+          application/json:
+            schema:
+              type: object
+              additionalProperties: true
+  "/textMessageTemplates/{id}":
+    get:
+      operationId: textMessageTemplates_get
+      summary: GET /textMessageTemplates/{id}
+      description: 'Follow Up Boss GET /textMessageTemplates/{id}. Source: https://docs.followupboss.com/reference/textmessagetemplates-id-get'
+      tags:
+      - textMessageTemplates
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+        description: id identifier
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json:
+              schema:
+                type: object
+        '400':
+          description: Bad request
+        '401':
+          description: Unauthorized
+        '404':
+          description: Not found
+    put:
+      operationId: textMessageTemplates_update
+      summary: PUT /textMessageTemplates/{id}
+      description: 'Follow Up Boss PUT /textMessageTemplates/{id}. Source: https://docs.followupboss.com/reference/textmessagetemplates-id-put'
+      tags:
+      - textMessageTemplates
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+        description: id identifier
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json:
+              schema:
+                type: object
+        '400':
+          description: Bad request
+        '401':
+          description: Unauthorized
+        '404':
+          description: Not found
+      requestBody:
+        required: false
+        content:
+          application/json:
+            schema:
+              type: object
+              additionalProperties: true
+    delete:
+      operationId: textMessageTemplates_delete
+      summary: DELETE /textMessageTemplates/{id}
+      description: 'Follow Up Boss DELETE /textMessageTemplates/{id}. Source: https://docs.followupboss.com/reference/textmessagetemplates-id-delete'
+      tags:
+      - textMessageTemplates
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+        description: id identifier
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json:
+              schema:
+                type: object
+        '400':
+          description: Bad request
+        '401':
+          description: Unauthorized
+        '404':
+          description: Not found
+  "/textMessageTemplates/merge":
+    post:
+      operationId: textMessageTemplates_merge_create
+      summary: POST /textMessageTemplates/merge
+      description: 'Follow Up Boss POST /textMessageTemplates/merge. Source: https://docs.followupboss.com/reference/textmessagetemplates-merge'
+      tags:
+      - textMessageTemplates
+      parameters: []
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json:
+              schema:
+                type: object
+        '400':
+          description: Bad request
+        '401':
+          description: Unauthorized
+        '404':
+          description: Not found
+      requestBody:
+        required: false
+        content:
+          application/json:
+            schema:
+              type: object
+              additionalProperties: true
+  "/emEvents":
+    get:
+      operationId: emEvents_list
+      summary: GET /emEvents
+      description: 'Follow Up Boss GET /emEvents. Source: https://docs.followupboss.com/reference/emevents-get'
+      tags:
+      - emEvents
+      parameters:
+      - name: limit
+        in: query
+        required: false
+        schema:
+          type: integer
+        description: Maximum number of records to return
+      - name: offset
+        in: query
+        required: false
+        schema:
+          type: integer
+        description: Offset for paginated results
+      - name: updatedAfter
+        in: query
+        required: false
+        schema:
+          type: string
+        description: Return records updated after this timestamp
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json:
+              schema:
+                type: object
+        '400':
+          description: Bad request
+        '401':
+          description: Unauthorized
+        '404':
+          description: Not found
+    post:
+      operationId: emEvents_create
+      summary: POST /emEvents
+      description: 'Follow Up Boss POST /emEvents. Source: https://docs.followupboss.com/reference/emevents-post'
+      tags:
+      - emEvents
+      parameters: []
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json:
+              schema:
+                type: object
+        '400':
+          description: Bad request
+        '401':
+          description: Unauthorized
+        '404':
+          description: Not found
+      requestBody:
+        required: false
+        content:
+          application/json:
+            schema:
+              type: object
+              additionalProperties: true
+  "/emCampaigns":
+    get:
+      operationId: emCampaigns_list
+      summary: GET /emCampaigns
+      description: 'Follow Up Boss GET /emCampaigns. Source: https://docs.followupboss.com/reference/emcampaigns-get'
+      tags:
+      - emCampaigns
+      parameters:
+      - name: limit
+        in: query
+        required: false
+        schema:
+          type: integer
+        description: Maximum number of records to return
+      - name: offset
+        in: query
+        required: false
+        schema:
+          type: integer
+        description: Offset for paginated results
+      - name: updatedAfter
+        in: query
+        required: false
+        schema:
+          type: string
+        description: Return records updated after this timestamp
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json:
+              schema:
+                type: object
+        '400':
+          description: Bad request
+        '401':
+          description: Unauthorized
+        '404':
+          description: Not found
+    post:
+      operationId: emCampaigns_create
+      summary: POST /emCampaigns
+      description: 'Follow Up Boss POST /emCampaigns. Source: https://docs.followupboss.com/reference/emcampaigns-post'
+      tags:
+      - emCampaigns
+      parameters: []
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json:
+              schema:
+                type: object
+        '400':
+          description: Bad request
+        '401':
+          description: Unauthorized
+        '404':
+          description: Not found
+      requestBody:
+        required: false
+        content:
+          application/json:
+            schema:
+              type: object
+              additionalProperties: true
+  "/emCampaigns/{id}":
+    put:
+      operationId: emCampaigns_update
+      summary: PUT /emCampaigns/{id}
+      description: 'Follow Up Boss PUT /emCampaigns/{id}. Source: https://docs.followupboss.com/reference/emcampaigns-id-put'
+      tags:
+      - emCampaigns
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+        description: id identifier
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json:
+              schema:
+                type: object
+        '400':
+          description: Bad request
+        '401':
+          description: Unauthorized
+        '404':
+          description: Not found
+      requestBody:
+        required: false
+        content:
+          application/json:
+            schema:
+              type: object
+              additionalProperties: true
+  "/customFields":
+    get:
+      operationId: customFields_list
+      summary: GET /customFields
+      description: 'Follow Up Boss GET /customFields. Source: https://docs.followupboss.com/reference/customfields-get'
+      tags:
+      - customFields
+      parameters:
+      - name: limit
+        in: query
+        required: false
+        schema:
+          type: integer
+        description: Maximum number of records to return
+      - name: offset
+        in: query
+        required: false
+        schema:
+          type: integer
+        description: Offset for paginated results
+      - name: updatedAfter
+        in: query
+        required: false
+        schema:
+          type: string
+        description: Return records updated after this timestamp
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json:
+              schema:
+                type: object
+        '400':
+          description: Bad request
+        '401':
+          description: Unauthorized
+        '404':
+          description: Not found
+    post:
+      operationId: customFields_create
+      summary: POST /customFields
+      description: 'Follow Up Boss POST /customFields. Source: https://docs.followupboss.com/reference/customfields-post'
+      tags:
+      - customFields
+      parameters: []
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json:
+              schema:
+                type: object
+        '400':
+          description: Bad request
+        '401':
+          description: Unauthorized
+        '404':
+          description: Not found
+      requestBody:
+        required: false
+        content:
+          application/json:
+            schema:
+              type: object
+              additionalProperties: true
+  "/customFields/{id}":
+    get:
+      operationId: customFields_get
+      summary: GET /customFields/{id}
+      description: 'Follow Up Boss GET /customFields/{id}. Source: https://docs.followupboss.com/reference/customfields-id-get'
+      tags:
+      - customFields
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+        description: id identifier
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json:
+              schema:
+                type: object
+        '400':
+          description: Bad request
+        '401':
+          description: Unauthorized
+        '404':
+          description: Not found
+    put:
+      operationId: customFields_update
+      summary: PUT /customFields/{id}
+      description: 'Follow Up Boss PUT /customFields/{id}. Source: https://docs.followupboss.com/reference/customfields-id-put'
+      tags:
+      - customFields
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+        description: id identifier
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json:
+              schema:
+                type: object
+        '400':
+          description: Bad request
+        '401':
+          description: Unauthorized
+        '404':
+          description: Not found
+      requestBody:
+        required: false
+        content:
+          application/json:
+            schema:
+              type: object
+              additionalProperties: true
+    delete:
+      operationId: customFields_delete
+      summary: DELETE /customFields/{id}
+      description: 'Follow Up Boss DELETE /customFields/{id}. Source: https://docs.followupboss.com/reference/customfields-id-delete'
+      tags:
+      - customFields
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+        description: id identifier
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json:
+              schema:
+                type: object
+        '400':
+          description: Bad request
+        '401':
+          description: Unauthorized
+        '404':
+          description: Not found
+  "/stages":
+    get:
+      operationId: stages_list
+      summary: GET /stages
+      description: 'Follow Up Boss GET /stages. Source: https://docs.followupboss.com/reference/stages-get'
+      tags:
+      - stages
+      parameters:
+      - name: limit
+        in: query
+        required: false
+        schema:
+          type: integer
+        description: Maximum number of records to return
+      - name: offset
+        in: query
+        required: false
+        schema:
+          type: integer
+        description: Offset for paginated results
+      - name: updatedAfter
+        in: query
+        required: false
+        schema:
+          type: string
+        description: Return records updated after this timestamp
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json:
+              schema:
+                type: object
+        '400':
+          description: Bad request
+        '401':
+          description: Unauthorized
+        '404':
+          description: Not found
+    post:
+      operationId: stages_create
+      summary: POST /stages
+      description: 'Follow Up Boss POST /stages. Source: https://docs.followupboss.com/reference/stages-post'
+      tags:
+      - stages
+      parameters: []
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json:
+              schema:
+                type: object
+        '400':
+          description: Bad request
+        '401':
+          description: Unauthorized
+        '404':
+          description: Not found
+      requestBody:
+        required: false
+        content:
+          application/json:
+            schema:
+              type: object
+              additionalProperties: true
+  "/stages/{id}":
+    get:
+      operationId: stages_get
+      summary: GET /stages/{id}
+      description: 'Follow Up Boss GET /stages/{id}. Source: https://docs.followupboss.com/reference/stages-id-get'
+      tags:
+      - stages
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+        description: id identifier
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json:
+              schema:
+                type: object
+        '400':
+          description: Bad request
+        '401':
+          description: Unauthorized
+        '404':
+          description: Not found
+    put:
+      operationId: stages_update
+      summary: PUT /stages/{id}
+      description: 'Follow Up Boss PUT /stages/{id}. Source: https://docs.followupboss.com/reference/stages-id-put'
+      tags:
+      - stages
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+        description: id identifier
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json:
+              schema:
+                type: object
+        '400':
+          description: Bad request
+        '401':
+          description: Unauthorized
+        '404':
+          description: Not found
+      requestBody:
+        required: false
+        content:
+          application/json:
+            schema:
+              type: object
+              additionalProperties: true
+    delete:
+      operationId: stages_delete
+      summary: DELETE /stages/{id}
+      description: 'Follow Up Boss DELETE /stages/{id}. Source: https://docs.followupboss.com/reference/stage-id-delete'
+      tags:
+      - stages
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+        description: id identifier
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json:
+              schema:
+                type: object
+        '400':
+          description: Bad request
+        '401':
+          description: Unauthorized
+        '404':
+          description: Not found
+  "/tasks":
+    get:
+      operationId: tasks_list
+      summary: GET /tasks
+      description: 'Follow Up Boss GET /tasks. Source: https://docs.followupboss.com/reference/tasks-get'
+      tags:
+      - tasks
+      parameters:
+      - name: limit
+        in: query
+        required: false
+        schema:
+          type: integer
+        description: Maximum number of records to return
+      - name: offset
+        in: query
+        required: false
+        schema:
+          type: integer
+        description: Offset for paginated results
+      - name: updatedAfter
+        in: query
+        required: false
+        schema:
+          type: string
+        description: Return records updated after this timestamp
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json:
+              schema:
+                type: object
+        '400':
+          description: Bad request
+        '401':
+          description: Unauthorized
+        '404':
+          description: Not found
+    post:
+      operationId: tasks_create
+      summary: POST /tasks
+      description: 'Follow Up Boss POST /tasks. Source: https://docs.followupboss.com/reference/tasks-post'
+      tags:
+      - tasks
+      parameters: []
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json:
+              schema:
+                type: object
+        '400':
+          description: Bad request
+        '401':
+          description: Unauthorized
+        '404':
+          description: Not found
+      requestBody:
+        required: false
+        content:
+          application/json:
+            schema:
+              type: object
+              additionalProperties: true
+  "/tasks/{id}":
+    get:
+      operationId: tasks_get
+      summary: GET /tasks/{id}
+      description: 'Follow Up Boss GET /tasks/{id}. Source: https://docs.followupboss.com/reference/tasks-id-get'
+      tags:
+      - tasks
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+        description: id identifier
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json:
+              schema:
+                type: object
+        '400':
+          description: Bad request
+        '401':
+          description: Unauthorized
+        '404':
+          description: Not found
+    put:
+      operationId: tasks_update
+      summary: PUT /tasks/{id}
+      description: 'Follow Up Boss PUT /tasks/{id}. Source: https://docs.followupboss.com/reference/tasks-id-put'
+      tags:
+      - tasks
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+        description: id identifier
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json:
+              schema:
+                type: object
+        '400':
+          description: Bad request
+        '401':
+          description: Unauthorized
+        '404':
+          description: Not found
+      requestBody:
+        required: false
+        content:
+          application/json:
+            schema:
+              type: object
+              additionalProperties: true
+    delete:
+      operationId: tasks_delete
+      summary: DELETE /tasks/{id}
+      description: 'Follow Up Boss DELETE /tasks/{id}. Source: https://docs.followupboss.com/reference/tasks-id-delete'
+      tags:
+      - tasks
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+        description: id identifier
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json:
+              schema:
+                type: object
+        '400':
+          description: Bad request
+        '401':
+          description: Unauthorized
+        '404':
+          description: Not found
+  "/appointments":
+    get:
+      operationId: appointments_list
+      summary: GET /appointments
+      description: 'Follow Up Boss GET /appointments. Source: https://docs.followupboss.com/reference/appointments-get'
+      tags:
+      - appointments
+      parameters:
+      - name: limit
+        in: query
+        required: false
+        schema:
+          type: integer
+        description: Maximum number of records to return
+      - name: offset
+        in: query
+        required: false
+        schema:
+          type: integer
+        description: Offset for paginated results
+      - name: updatedAfter
+        in: query
+        required: false
+        schema:
+          type: string
+        description: Return records updated after this timestamp
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json:
+              schema:
+                type: object
+        '400':
+          description: Bad request
+        '401':
+          description: Unauthorized
+        '404':
+          description: Not found
+    post:
+      operationId: appointments_create
+      summary: POST /appointments
+      description: 'Follow Up Boss POST /appointments. Source: https://docs.followupboss.com/reference/appointments-post'
+      tags:
+      - appointments
+      parameters: []
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json:
+              schema:
+                type: object
+        '400':
+          description: Bad request
+        '401':
+          description: Unauthorized
+        '404':
+          description: Not found
+      requestBody:
+        required: false
+        content:
+          application/json:
+            schema:
+              type: object
+              additionalProperties: true
+  "/appointments/{id}":
+    get:
+      operationId: appointments_get
+      summary: GET /appointments/{id}
+      description: 'Follow Up Boss GET /appointments/{id}. Source: https://docs.followupboss.com/reference/appointments-id-get'
+      tags:
+      - appointments
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+        description: id identifier
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json:
+              schema:
+                type: object
+        '400':
+          description: Bad request
+        '401':
+          description: Unauthorized
+        '404':
+          description: Not found
+    put:
+      operationId: appointments_update
+      summary: PUT /appointments/{id}
+      description: 'Follow Up Boss PUT /appointments/{id}. Source: https://docs.followupboss.com/reference/appointments-id-put'
+      tags:
+      - appointments
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+        description: id identifier
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json:
+              schema:
+                type: object
+        '400':
+          description: Bad request
+        '401':
+          description: Unauthorized
+        '404':
+          description: Not found
+      requestBody:
+        required: false
+        content:
+          application/json:
+            schema:
+              type: object
+              additionalProperties: true
+    delete:
+      operationId: appointments_delete
+      summary: DELETE /appointments/{id}
+      description: 'Follow Up Boss DELETE /appointments/{id}. Source: https://docs.followupboss.com/reference/appointments-id-delete'
+      tags:
+      - appointments
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+        description: id identifier
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json:
+              schema:
+                type: object
+        '400':
+          description: Bad request
+        '401':
+          description: Unauthorized
+        '404':
+          description: Not found
+  "/appointmentTypes":
+    get:
+      operationId: appointmentTypes_list
+      summary: GET /appointmentTypes
+      description: 'Follow Up Boss GET /appointmentTypes. Source: https://docs.followupboss.com/reference/appointmenttypes-get'
+      tags:
+      - appointmentTypes
+      parameters:
+      - name: limit
+        in: query
+        required: false
+        schema:
+          type: integer
+        description: Maximum number of records to return
+      - name: offset
+        in: query
+        required: false
+        schema:
+          type: integer
+        description: Offset for paginated results
+      - name: updatedAfter
+        in: query
+        required: false
+        schema:
+          type: string
+        description: Return records updated after this timestamp
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json:
+              schema:
+                type: object
+        '400':
+          description: Bad request
+        '401':
+          description: Unauthorized
+        '404':
+          description: Not found
+    post:
+      operationId: appointmentTypes_create
+      summary: POST /appointmentTypes
+      description: 'Follow Up Boss POST /appointmentTypes. Source: https://docs.followupboss.com/reference/appointmenttypes-post'
+      tags:
+      - appointmentTypes
+      parameters: []
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json:
+              schema:
+                type: object
+        '400':
+          description: Bad request
+        '401':
+          description: Unauthorized
+        '404':
+          description: Not found
+      requestBody:
+        required: false
+        content:
+          application/json:
+            schema:
+              type: object
+              additionalProperties: true
+  "/appointmentTypes/{id}":
+    get:
+      operationId: appointmentTypes_get
+      summary: GET /appointmentTypes/{id}
+      description: 'Follow Up Boss GET /appointmentTypes/{id}. Source: https://docs.followupboss.com/reference/appointmenttypes-id-get'
+      tags:
+      - appointmentTypes
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+        description: id identifier
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json:
+              schema:
+                type: object
+        '400':
+          description: Bad request
+        '401':
+          description: Unauthorized
+        '404':
+          description: Not found
+    put:
+      operationId: appointmentTypes_update
+      summary: PUT /appointmentTypes/{id}
+      description: 'Follow Up Boss PUT /appointmentTypes/{id}. Source: https://docs.followupboss.com/reference/appointmenttypes-id-put'
+      tags:
+      - appointmentTypes
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+        description: id identifier
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json:
+              schema:
+                type: object
+        '400':
+          description: Bad request
+        '401':
+          description: Unauthorized
+        '404':
+          description: Not found
+      requestBody:
+        required: false
+        content:
+          application/json:
+            schema:
+              type: object
+              additionalProperties: true
+    delete:
+      operationId: appointmentTypes_delete
+      summary: DELETE /appointmentTypes/{id}
+      description: 'Follow Up Boss DELETE /appointmentTypes/{id}. Source: https://docs.followupboss.com/reference/appointmenttypes-id-delete'
+      tags:
+      - appointmentTypes
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+        description: id identifier
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json:
+              schema:
+                type: object
+        '400':
+          description: Bad request
+        '401':
+          description: Unauthorized
+        '404':
+          description: Not found
+  "/appointmentOutcomes":
+    get:
+      operationId: appointmentOutcomes_list
+      summary: GET /appointmentOutcomes
+      description: 'Follow Up Boss GET /appointmentOutcomes. Source: https://docs.followupboss.com/reference/appointmentoutcomes-get'
+      tags:
+      - appointmentOutcomes
+      parameters:
+      - name: limit
+        in: query
+        required: false
+        schema:
+          type: integer
+        description: Maximum number of records to return
+      - name: offset
+        in: query
+        required: false
+        schema:
+          type: integer
+        description: Offset for paginated results
+      - name: updatedAfter
+        in: query
+        required: false
+        schema:
+          type: string
+        description: Return records updated after this timestamp
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json:
+              schema:
+                type: object
+        '400':
+          description: Bad request
+        '401':
+          description: Unauthorized
+        '404':
+          description: Not found
+    post:
+      operationId: appointmentOutcomes_create
+      summary: POST /appointmentOutcomes
+      description: 'Follow Up Boss POST /appointmentOutcomes. Source: https://docs.followupboss.com/reference/appointmentoutcomes-post'
+      tags:
+      - appointmentOutcomes
+      parameters: []
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json:
+              schema:
+                type: object
+        '400':
+          description: Bad request
+        '401':
+          description: Unauthorized
+        '404':
+          description: Not found
+      requestBody:
+        required: false
+        content:
+          application/json:
+            schema:
+              type: object
+              additionalProperties: true
+  "/appointmentOutcomes/{id}":
+    get:
+      operationId: appointmentOutcomes_get
+      summary: GET /appointmentOutcomes/{id}
+      description: 'Follow Up Boss GET /appointmentOutcomes/{id}. Source: https://docs.followupboss.com/reference/appointmentoutcomes-id-get'
+      tags:
+      - appointmentOutcomes
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+        description: id identifier
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json:
+              schema:
+                type: object
+        '400':
+          description: Bad request
+        '401':
+          description: Unauthorized
+        '404':
+          description: Not found
+    put:
+      operationId: appointmentOutcomes_update
+      summary: PUT /appointmentOutcomes/{id}
+      description: 'Follow Up Boss PUT /appointmentOutcomes/{id}. Source: https://docs.followupboss.com/reference/appointmentoutcomes-id-put'
+      tags:
+      - appointmentOutcomes
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+        description: id identifier
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json:
+              schema:
+                type: object
+        '400':
+          description: Bad request
+        '401':
+          description: Unauthorized
+        '404':
+          description: Not found
+      requestBody:
+        required: false
+        content:
+          application/json:
+            schema:
+              type: object
+              additionalProperties: true
+    delete:
+      operationId: appointmentOutcomes_delete
+      summary: DELETE /appointmentOutcomes/{id}
+      description: 'Follow Up Boss DELETE /appointmentOutcomes/{id}. Source: https://docs.followupboss.com/reference/appointmentoutcomes-id-delete'
+      tags:
+      - appointmentOutcomes
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+        description: id identifier
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json:
+              schema:
+                type: object
+        '400':
+          description: Bad request
+        '401':
+          description: Unauthorized
+        '404':
+          description: Not found
+  "/webhooks":
+    get:
+      operationId: webhooks_list
+      summary: GET /webhooks
+      description: 'Follow Up Boss GET /webhooks. Source: https://docs.followupboss.com/reference/webhooks-get'
+      tags:
+      - webhooks
+      parameters:
+      - name: limit
+        in: query
+        required: false
+        schema:
+          type: integer
+        description: Maximum number of records to return
+      - name: offset
+        in: query
+        required: false
+        schema:
+          type: integer
+        description: Offset for paginated results
+      - name: updatedAfter
+        in: query
+        required: false
+        schema:
+          type: string
+        description: Return records updated after this timestamp
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json:
+              schema:
+                type: object
+        '400':
+          description: Bad request
+        '401':
+          description: Unauthorized
+        '404':
+          description: Not found
+    post:
+      operationId: webhooks_create
+      summary: POST /webhooks
+      description: 'Follow Up Boss POST /webhooks. Source: https://docs.followupboss.com/reference/webhooks-post'
+      tags:
+      - webhooks
+      parameters: []
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json:
+              schema:
+                type: object
+        '400':
+          description: Bad request
+        '401':
+          description: Unauthorized
+        '404':
+          description: Not found
+      requestBody:
+        required: false
+        content:
+          application/json:
+            schema:
+              type: object
+              additionalProperties: true
+  "/webhooks/{id}":
+    get:
+      operationId: webhooks_get
+      summary: GET /webhooks/{id}
+      description: 'Follow Up Boss GET /webhooks/{id}. Source: https://docs.followupboss.com/reference/webhooks-id-get'
+      tags:
+      - webhooks
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+        description: id identifier
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json:
+              schema:
+                type: object
+        '400':
+          description: Bad request
+        '401':
+          description: Unauthorized
+        '404':
+          description: Not found
+    put:
+      operationId: webhooks_update
+      summary: PUT /webhooks/{id}
+      description: 'Follow Up Boss PUT /webhooks/{id}. Source: https://docs.followupboss.com/reference/webhooks-id-put'
+      tags:
+      - webhooks
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+        description: id identifier
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json:
+              schema:
+                type: object
+        '400':
+          description: Bad request
+        '401':
+          description: Unauthorized
+        '404':
+          description: Not found
+      requestBody:
+        required: false
+        content:
+          application/json:
+            schema:
+              type: object
+              additionalProperties: true
+    delete:
+      operationId: webhooks_delete
+      summary: DELETE /webhooks/{id}
+      description: 'Follow Up Boss DELETE /webhooks/{id}. Source: https://docs.followupboss.com/reference/webhooks-id-delete'
+      tags:
+      - webhooks
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+        description: id identifier
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json:
+              schema:
+                type: object
+        '400':
+          description: Bad request
+        '401':
+          description: Unauthorized
+        '404':
+          description: Not found
+  "/webhookEvents/{id}":
+    get:
+      operationId: webhookEvents_get
+      summary: GET /webhookEvents/{id}
+      description: 'Follow Up Boss GET /webhookEvents/{id}. Source: https://docs.followupboss.com/reference/webhookevents-get'
+      tags:
+      - webhookEvents
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+        description: id identifier
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json:
+              schema:
+                type: object
+        '400':
+          description: Bad request
+        '401':
+          description: Unauthorized
+        '404':
+          description: Not found
+  "/pipelines":
+    get:
+      operationId: pipelines_list
+      summary: GET /pipelines
+      description: 'Follow Up Boss GET /pipelines. Source: https://docs.followupboss.com/reference/pipelines-get'
+      tags:
+      - pipelines
+      parameters:
+      - name: limit
+        in: query
+        required: false
+        schema:
+          type: integer
+        description: Maximum number of records to return
+      - name: offset
+        in: query
+        required: false
+        schema:
+          type: integer
+        description: Offset for paginated results
+      - name: updatedAfter
+        in: query
+        required: false
+        schema:
+          type: string
+        description: Return records updated after this timestamp
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json:
+              schema:
+                type: object
+        '400':
+          description: Bad request
+        '401':
+          description: Unauthorized
+        '404':
+          description: Not found
+    post:
+      operationId: pipelines_create
+      summary: POST /pipelines
+      description: 'Follow Up Boss POST /pipelines. Source: https://docs.followupboss.com/reference/pipelines-post'
+      tags:
+      - pipelines
+      parameters: []
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json:
+              schema:
+                type: object
+        '400':
+          description: Bad request
+        '401':
+          description: Unauthorized
+        '404':
+          description: Not found
+      requestBody:
+        required: false
+        content:
+          application/json:
+            schema:
+              type: object
+              additionalProperties: true
+  "/pipelines/{id}":
+    get:
+      operationId: pipelines_get
+      summary: GET /pipelines/{id}
+      description: 'Follow Up Boss GET /pipelines/{id}. Source: https://docs.followupboss.com/reference/pipelines-id-get'
+      tags:
+      - pipelines
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+        description: id identifier
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json:
+              schema:
+                type: object
+        '400':
+          description: Bad request
+        '401':
+          description: Unauthorized
+        '404':
+          description: Not found
+    put:
+      operationId: pipelines_update
+      summary: PUT /pipelines/{id}
+      description: 'Follow Up Boss PUT /pipelines/{id}. Source: https://docs.followupboss.com/reference/pipelines-id-put'
+      tags:
+      - pipelines
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+        description: id identifier
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json:
+              schema:
+                type: object
+        '400':
+          description: Bad request
+        '401':
+          description: Unauthorized
+        '404':
+          description: Not found
+      requestBody:
+        required: false
+        content:
+          application/json:
+            schema:
+              type: object
+              additionalProperties: true
+    delete:
+      operationId: pipelines_delete
+      summary: DELETE /pipelines/{id}
+      description: 'Follow Up Boss DELETE /pipelines/{id}. Source: https://docs.followupboss.com/reference/pipelines-id-delete'
+      tags:
+      - pipelines
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+        description: id identifier
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json:
+              schema:
+                type: object
+        '400':
+          description: Bad request
+        '401':
+          description: Unauthorized
+        '404':
+          description: Not found
+  "/deals":
+    get:
+      operationId: deals_list
+      summary: GET /deals
+      description: 'Follow Up Boss GET /deals. Source: https://docs.followupboss.com/reference/deals-get'
+      tags:
+      - deals
+      parameters:
+      - name: limit
+        in: query
+        required: false
+        schema:
+          type: integer
+        description: Maximum number of records to return
+      - name: offset
+        in: query
+        required: false
+        schema:
+          type: integer
+        description: Offset for paginated results
+      - name: updatedAfter
+        in: query
+        required: false
+        schema:
+          type: string
+        description: Return records updated after this timestamp
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json:
+              schema:
+                type: object
+        '400':
+          description: Bad request
+        '401':
+          description: Unauthorized
+        '404':
+          description: Not found
+    post:
+      operationId: deals_create
+      summary: POST /deals
+      description: 'Follow Up Boss POST /deals. Source: https://docs.followupboss.com/reference/deals-post'
+      tags:
+      - deals
+      parameters: []
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json:
+              schema:
+                type: object
+        '400':
+          description: Bad request
+        '401':
+          description: Unauthorized
+        '404':
+          description: Not found
+      requestBody:
+        required: false
+        content:
+          application/json:
+            schema:
+              type: object
+              additionalProperties: true
+  "/deals/{id}":
+    get:
+      operationId: deals_get
+      summary: GET /deals/{id}
+      description: 'Follow Up Boss GET /deals/{id}. Source: https://docs.followupboss.com/reference/deals-id-get'
+      tags:
+      - deals
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+        description: id identifier
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json:
+              schema:
+                type: object
+        '400':
+          description: Bad request
+        '401':
+          description: Unauthorized
+        '404':
+          description: Not found
+    put:
+      operationId: deals_update
+      summary: PUT /deals/{id}
+      description: 'Follow Up Boss PUT /deals/{id}. Source: https://docs.followupboss.com/reference/deals-id-put'
+      tags:
+      - deals
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+        description: id identifier
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json:
+              schema:
+                type: object
+        '400':
+          description: Bad request
+        '401':
+          description: Unauthorized
+        '404':
+          description: Not found
+      requestBody:
+        required: false
+        content:
+          application/json:
+            schema:
+              type: object
+              additionalProperties: true
+    delete:
+      operationId: deals_delete
+      summary: DELETE /deals/{id}
+      description: 'Follow Up Boss DELETE /deals/{id}. Source: https://docs.followupboss.com/reference/deals-id-delete'
+      tags:
+      - deals
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+        description: id identifier
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json:
+              schema:
+                type: object
+        '400':
+          description: Bad request
+        '401':
+          description: Unauthorized
+        '404':
+          description: Not found
+  "/dealAttachments":
+    post:
+      operationId: dealAttachments_create
+      summary: POST /dealAttachments
+      description: 'Follow Up Boss POST /dealAttachments. Source: https://docs.followupboss.com/reference/dealattachments-post'
+      tags:
+      - dealAttachments
+      parameters: []
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json:
+              schema:
+                type: object
+        '400':
+          description: Bad request
+        '401':
+          description: Unauthorized
+        '404':
+          description: Not found
+      requestBody:
+        required: false
+        content:
+          application/json:
+            schema:
+              type: object
+              additionalProperties: true
+  "/dealAttachments/{id}":
+    get:
+      operationId: dealAttachments_get
+      summary: GET /dealAttachments/{id}
+      description: 'Follow Up Boss GET /dealAttachments/{id}. Source: https://docs.followupboss.com/reference/dealattachments-id-get'
+      tags:
+      - dealAttachments
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+        description: id identifier
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json:
+              schema:
+                type: object
+        '400':
+          description: Bad request
+        '401':
+          description: Unauthorized
+        '404':
+          description: Not found
+    put:
+      operationId: dealAttachments_update
+      summary: PUT /dealAttachments/{id}
+      description: 'Follow Up Boss PUT /dealAttachments/{id}. Source: https://docs.followupboss.com/reference/dealattachments-id-put'
+      tags:
+      - dealAttachments
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+        description: id identifier
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json:
+              schema:
+                type: object
+        '400':
+          description: Bad request
+        '401':
+          description: Unauthorized
+        '404':
+          description: Not found
+      requestBody:
+        required: false
+        content:
+          application/json:
+            schema:
+              type: object
+              additionalProperties: true
+    delete:
+      operationId: dealAttachments_delete
+      summary: DELETE /dealAttachments/{id}
+      description: 'Follow Up Boss DELETE /dealAttachments/{id}. Source: https://docs.followupboss.com/reference/dealattachments-id-delete'
+      tags:
+      - dealAttachments
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+        description: id identifier
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json:
+              schema:
+                type: object
+        '400':
+          description: Bad request
+        '401':
+          description: Unauthorized
+        '404':
+          description: Not found
+  "/dealCustomFields":
+    get:
+      operationId: dealCustomFields_list
+      summary: GET /dealCustomFields
+      description: 'Follow Up Boss GET /dealCustomFields. Source: https://docs.followupboss.com/reference/dealcustomfields-get'
+      tags:
+      - dealCustomFields
+      parameters:
+      - name: limit
+        in: query
+        required: false
+        schema:
+          type: integer
+        description: Maximum number of records to return
+      - name: offset
+        in: query
+        required: false
+        schema:
+          type: integer
+        description: Offset for paginated results
+      - name: updatedAfter
+        in: query
+        required: false
+        schema:
+          type: string
+        description: Return records updated after this timestamp
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json:
+              schema:
+                type: object
+        '400':
+          description: Bad request
+        '401':
+          description: Unauthorized
+        '404':
+          description: Not found
+    post:
+      operationId: dealCustomFields_create
+      summary: POST /dealCustomFields
+      description: 'Follow Up Boss POST /dealCustomFields. Source: https://docs.followupboss.com/reference/dealcustomfields-post'
+      tags:
+      - dealCustomFields
+      parameters: []
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json:
+              schema:
+                type: object
+        '400':
+          description: Bad request
+        '401':
+          description: Unauthorized
+        '404':
+          description: Not found
+      requestBody:
+        required: false
+        content:
+          application/json:
+            schema:
+              type: object
+              additionalProperties: true
+  "/dealCustomFields/{id}":
+    get:
+      operationId: dealCustomFields_get
+      summary: GET /dealCustomFields/{id}
+      description: 'Follow Up Boss GET /dealCustomFields/{id}. Source: https://docs.followupboss.com/reference/dealcustomfields-id-get'
+      tags:
+      - dealCustomFields
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+        description: id identifier
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json:
+              schema:
+                type: object
+        '400':
+          description: Bad request
+        '401':
+          description: Unauthorized
+        '404':
+          description: Not found
+    put:
+      operationId: dealCustomFields_update
+      summary: PUT /dealCustomFields/{id}
+      description: 'Follow Up Boss PUT /dealCustomFields/{id}. Source: https://docs.followupboss.com/reference/dealcustomfields-id-put'
+      tags:
+      - dealCustomFields
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+        description: id identifier
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json:
+              schema:
+                type: object
+        '400':
+          description: Bad request
+        '401':
+          description: Unauthorized
+        '404':
+          description: Not found
+      requestBody:
+        required: false
+        content:
+          application/json:
+            schema:
+              type: object
+              additionalProperties: true
+    delete:
+      operationId: dealCustomFields_delete
+      summary: DELETE /dealCustomFields/{id}
+      description: 'Follow Up Boss DELETE /dealCustomFields/{id}. Source: https://docs.followupboss.com/reference/dealcustomfields-id-delete'
+      tags:
+      - dealCustomFields
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+        description: id identifier
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json:
+              schema:
+                type: object
+        '400':
+          description: Bad request
+        '401':
+          description: Unauthorized
+        '404':
+          description: Not found
+  "/groups":
+    get:
+      operationId: groups_list
+      summary: GET /groups
+      description: 'Follow Up Boss GET /groups. Source: https://docs.followupboss.com/reference/groups-get'
+      tags:
+      - groups
+      parameters:
+      - name: limit
+        in: query
+        required: false
+        schema:
+          type: integer
+        description: Maximum number of records to return
+      - name: offset
+        in: query
+        required: false
+        schema:
+          type: integer
+        description: Offset for paginated results
+      - name: updatedAfter
+        in: query
+        required: false
+        schema:
+          type: string
+        description: Return records updated after this timestamp
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json:
+              schema:
+                type: object
+        '400':
+          description: Bad request
+        '401':
+          description: Unauthorized
+        '404':
+          description: Not found
+    post:
+      operationId: groups_create
+      summary: POST /groups
+      description: 'Follow Up Boss POST /groups. Source: https://docs.followupboss.com/reference/groups-post'
+      tags:
+      - groups
+      parameters: []
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json:
+              schema:
+                type: object
+        '400':
+          description: Bad request
+        '401':
+          description: Unauthorized
+        '404':
+          description: Not found
+      requestBody:
+        required: false
+        content:
+          application/json:
+            schema:
+              type: object
+              additionalProperties: true
+  "/groups/roundRobin":
+    get:
+      operationId: groups_roundRobin_list
+      summary: GET /groups/roundRobin
+      description: 'Follow Up Boss GET /groups/roundRobin. Source: https://docs.followupboss.com/reference/groups-roundrobin-get'
+      tags:
+      - groups
+      parameters:
+      - name: limit
+        in: query
+        required: false
+        schema:
+          type: integer
+        description: Maximum number of records to return
+      - name: offset
+        in: query
+        required: false
+        schema:
+          type: integer
+        description: Offset for paginated results
+      - name: updatedAfter
+        in: query
+        required: false
+        schema:
+          type: string
+        description: Return records updated after this timestamp
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json:
+              schema:
+                type: object
+        '400':
+          description: Bad request
+        '401':
+          description: Unauthorized
+        '404':
+          description: Not found
+  "/groups/{id}":
+    get:
+      operationId: groups_get
+      summary: GET /groups/{id}
+      description: 'Follow Up Boss GET /groups/{id}. Source: https://docs.followupboss.com/reference/groups-id-get'
+      tags:
+      - groups
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+        description: id identifier
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json:
+              schema:
+                type: object
+        '400':
+          description: Bad request
+        '401':
+          description: Unauthorized
+        '404':
+          description: Not found
+    put:
+      operationId: groups_update
+      summary: PUT /groups/{id}
+      description: 'Follow Up Boss PUT /groups/{id}. Source: https://docs.followupboss.com/reference/groups-id-put'
+      tags:
+      - groups
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+        description: id identifier
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json:
+              schema:
+                type: object
+        '400':
+          description: Bad request
+        '401':
+          description: Unauthorized
+        '404':
+          description: Not found
+      requestBody:
+        required: false
+        content:
+          application/json:
+            schema:
+              type: object
+              additionalProperties: true
+    delete:
+      operationId: groups_delete
+      summary: DELETE /groups/{id}
+      description: 'Follow Up Boss DELETE /groups/{id}. Source: https://docs.followupboss.com/reference/groups-id-delete'
+      tags:
+      - groups
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+        description: id identifier
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json:
+              schema:
+                type: object
+        '400':
+          description: Bad request
+        '401':
+          description: Unauthorized
+        '404':
+          description: Not found
+  "/teams":
+    get:
+      operationId: teams_list
+      summary: GET /teams
+      description: 'Follow Up Boss GET /teams. Source: https://docs.followupboss.com/reference/teams-get'
+      tags:
+      - teams
+      parameters:
+      - name: limit
+        in: query
+        required: false
+        schema:
+          type: integer
+        description: Maximum number of records to return
+      - name: offset
+        in: query
+        required: false
+        schema:
+          type: integer
+        description: Offset for paginated results
+      - name: updatedAfter
+        in: query
+        required: false
+        schema:
+          type: string
+        description: Return records updated after this timestamp
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json:
+              schema:
+                type: object
+        '400':
+          description: Bad request
+        '401':
+          description: Unauthorized
+        '404':
+          description: Not found
+    post:
+      operationId: teams_create
+      summary: POST /teams
+      description: 'Follow Up Boss POST /teams. Source: https://docs.followupboss.com/reference/teams-post'
+      tags:
+      - teams
+      parameters: []
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json:
+              schema:
+                type: object
+        '400':
+          description: Bad request
+        '401':
+          description: Unauthorized
+        '404':
+          description: Not found
+      requestBody:
+        required: false
+        content:
+          application/json:
+            schema:
+              type: object
+              additionalProperties: true
+  "/teams/{id}":
+    get:
+      operationId: teams_get
+      summary: GET /teams/{id}
+      description: 'Follow Up Boss GET /teams/{id}. Source: https://docs.followupboss.com/reference/teams-id-get'
+      tags:
+      - teams
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+        description: id identifier
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json:
+              schema:
+                type: object
+        '400':
+          description: Bad request
+        '401':
+          description: Unauthorized
+        '404':
+          description: Not found
+    put:
+      operationId: teams_update
+      summary: PUT /teams/{id}
+      description: 'Follow Up Boss PUT /teams/{id}. Source: https://docs.followupboss.com/reference/teams-id-put'
+      tags:
+      - teams
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+        description: id identifier
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json:
+              schema:
+                type: object
+        '400':
+          description: Bad request
+        '401':
+          description: Unauthorized
+        '404':
+          description: Not found
+      requestBody:
+        required: false
+        content:
+          application/json:
+            schema:
+              type: object
+              additionalProperties: true
+    delete:
+      operationId: teams_delete
+      summary: DELETE /teams/{id}
+      description: 'Follow Up Boss DELETE /teams/{id}. Source: https://docs.followupboss.com/reference/teams-id-delete'
+      tags:
+      - teams
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+        description: id identifier
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json:
+              schema:
+                type: object
+        '400':
+          description: Bad request
+        '401':
+          description: Unauthorized
+        '404':
+          description: Not found
+  "/teamInboxes":
+    get:
+      operationId: teamInboxes_list
+      summary: GET /teamInboxes
+      description: 'Follow Up Boss GET /teamInboxes. Source: https://docs.followupboss.com/reference/teaminboxes'
+      tags:
+      - teamInboxes
+      parameters:
+      - name: limit
+        in: query
+        required: false
+        schema:
+          type: integer
+        description: Maximum number of records to return
+      - name: offset
+        in: query
+        required: false
+        schema:
+          type: integer
+        description: Offset for paginated results
+      - name: updatedAfter
+        in: query
+        required: false
+        schema:
+          type: string
+        description: Return records updated after this timestamp
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json:
+              schema:
+                type: object
+        '400':
+          description: Bad request
+        '401':
+          description: Unauthorized
+        '404':
+          description: Not found
+  "/ponds":
+    get:
+      operationId: ponds_list
+      summary: GET /ponds
+      description: 'Follow Up Boss GET /ponds. Source: https://docs.followupboss.com/reference/ponds-get'
+      tags:
+      - ponds
+      parameters:
+      - name: limit
+        in: query
+        required: false
+        schema:
+          type: integer
+        description: Maximum number of records to return
+      - name: offset
+        in: query
+        required: false
+        schema:
+          type: integer
+        description: Offset for paginated results
+      - name: updatedAfter
+        in: query
+        required: false
+        schema:
+          type: string
+        description: Return records updated after this timestamp
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json:
+              schema:
+                type: object
+        '400':
+          description: Bad request
+        '401':
+          description: Unauthorized
+        '404':
+          description: Not found
+    post:
+      operationId: ponds_create
+      summary: POST /ponds
+      description: 'Follow Up Boss POST /ponds. Source: https://docs.followupboss.com/reference/ponds-post'
+      tags:
+      - ponds
+      parameters: []
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json:
+              schema:
+                type: object
+        '400':
+          description: Bad request
+        '401':
+          description: Unauthorized
+        '404':
+          description: Not found
+      requestBody:
+        required: false
+        content:
+          application/json:
+            schema:
+              type: object
+              additionalProperties: true
+  "/ponds/{id}":
+    get:
+      operationId: ponds_get
+      summary: GET /ponds/{id}
+      description: 'Follow Up Boss GET /ponds/{id}. Source: https://docs.followupboss.com/reference/ponds-id-get'
+      tags:
+      - ponds
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+        description: id identifier
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json:
+              schema:
+                type: object
+        '400':
+          description: Bad request
+        '401':
+          description: Unauthorized
+        '404':
+          description: Not found
+    put:
+      operationId: ponds_update
+      summary: PUT /ponds/{id}
+      description: 'Follow Up Boss PUT /ponds/{id}. Source: https://docs.followupboss.com/reference/ponds-id-put'
+      tags:
+      - ponds
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+        description: id identifier
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json:
+              schema:
+                type: object
+        '400':
+          description: Bad request
+        '401':
+          description: Unauthorized
+        '404':
+          description: Not found
+      requestBody:
+        required: false
+        content:
+          application/json:
+            schema:
+              type: object
+              additionalProperties: true
+    delete:
+      operationId: ponds_delete
+      summary: DELETE /ponds/{id}
+      description: 'Follow Up Boss DELETE /ponds/{id}. Source: https://docs.followupboss.com/reference/ponds-id-delete'
+      tags:
+      - ponds
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+        description: id identifier
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json:
+              schema:
+                type: object
+        '400':
+          description: Bad request
+        '401':
+          description: Unauthorized
+        '404':
+          description: Not found
+  "/reactions/{id}":
+    get:
+      operationId: reactions_get
+      summary: GET /reactions/{id}
+      description: 'Follow Up Boss GET /reactions/{id}. Source: https://docs.followupboss.com/reference/reactions'
+      tags:
+      - reactions
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+        description: id identifier
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json:
+              schema:
+                type: object
+        '400':
+          description: Bad request
+        '401':
+          description: Unauthorized
+        '404':
+          description: Not found
+  "/reactions/{refType}/{refId}":
+    post:
+      operationId: reactions_refType_refId_create
+      summary: POST /reactions/{refType}/{refId}
+      description: 'Follow Up Boss POST /reactions/{refType}/{refId}. Source: https://docs.followupboss.com/reference/reactions-reftype-refid-post'
+      tags:
+      - reactions
+      parameters:
+      - name: refType
+        in: path
+        required: true
+        schema:
+          type: string
+        description: refType identifier
+      - name: refId
+        in: path
+        required: true
+        schema:
+          type: string
+        description: refId identifier
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json:
+              schema:
+                type: object
+        '400':
+          description: Bad request
+        '401':
+          description: Unauthorized
+        '404':
+          description: Not found
+      requestBody:
+        required: false
+        content:
+          application/json:
+            schema:
+              type: object
+              additionalProperties: true
+    delete:
+      operationId: reactions_refType_refId_delete
+      summary: DELETE /reactions/{refType}/{refId}
+      description: 'Follow Up Boss DELETE /reactions/{refType}/{refId}. Source: https://docs.followupboss.com/reference/reactions-reftype-refid-delete'
+      tags:
+      - reactions
+      parameters:
+      - name: refType
+        in: path
+        required: true
+        schema:
+          type: string
+        description: refType identifier
+      - name: refId
+        in: path
+        required: true
+        schema:
+          type: string
+        description: refId identifier
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json:
+              schema:
+                type: object
+        '400':
+          description: Bad request
+        '401':
+          description: Unauthorized
+        '404':
+          description: Not found
+  "/threadedReplies/{id}":
+    get:
+      operationId: threadedReplies_get
+      summary: GET /threadedReplies/{id}
+      description: 'Follow Up Boss GET /threadedReplies/{id}. Source: https://docs.followupboss.com/reference/threaded-replies'
+      tags:
+      - threadedReplies
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+        description: id identifier
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json:
+              schema:
+                type: object
+        '400':
+          description: Bad request
+        '401':
+          description: Unauthorized
+        '404':
+          description: Not found
+  "/timeframes":
+    get:
+      operationId: timeframes_list
+      summary: GET /timeframes
+      description: 'Follow Up Boss GET /timeframes. Source: https://docs.followupboss.com/reference/timeframes-get'
+      tags:
+      - timeframes
+      parameters:
+      - name: limit
+        in: query
+        required: false
+        schema:
+          type: integer
+        description: Maximum number of records to return
+      - name: offset
+        in: query
+        required: false
+        schema:
+          type: integer
+        description: Offset for paginated results
+      - name: updatedAfter
+        in: query
+        required: false
+        schema:
+          type: string
+        description: Return records updated after this timestamp
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json:
+              schema:
+                type: object
+        '400':
+          description: Bad request
+        '401':
+          description: Unauthorized
+        '404':
+          description: Not found
+x-mcp:
+  transport:
+  - stdio
+  - http
+  orchestration: code
+  endpoint_tools: hidden

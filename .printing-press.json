@@ -1,0 +1,33 @@
+{
+  "schema_version": 1,
+  "generated_at": "2026-05-14T15:22:38.353427Z",
+  "printing_press_version": "4.6.1",
+  "api_name": "follow-up-boss",
+  "display_name": "Follow Up Boss",
+  "cli_name": "follow-up-boss-pp-cli",
+  "owner": "user",
+  "spec_url": "https://docs.followupboss.com/reference/getting-started",
+  "spec_path": "/tmp/fub-openapi.yaml",
+  "spec_format": "openapi3",
+  "spec_checksum": "sha256:8024e5a748922864465d043ab2f68f1b6cb547997c1d5d070768ad827fc6d6e9",
+  "mcp_binary": "follow-up-boss-pp-mcp",
+  "mcp_tool_count": 143,
+  "mcp_ready": "full",
+  "api_version": "1.0.0",
+  "auth_type": "api_key_basic_or_oauth",
+  "auth_env_vars": [
+    "FUB_API_KEY",
+    "FUB_SYSTEM",
+    "FUB_SYSTEM_KEY",
+    "FUB_CLIENT_ID",
+    "FUB_CLIENT_SECRET"
+  ],
+  "auth_key_url": "https://docs.followupboss.com/reference/authentication",
+  "oauth_authorize_url": "https://app.followupboss.com/oauth/authorize",
+  "oauth_token_url": "https://app.followupboss.com/oauth/token",
+  "local_customizations": [
+    "follow-up-boss-basic-auth-and-system-headers",
+    "follow-up-boss-oauth-helper-commands",
+    "agent-native-crm-local-reasoning"
+  ]
+}

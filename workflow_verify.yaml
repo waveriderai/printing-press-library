@@ -1,0 +1,27 @@
+workflows:
+  - name: fub-agent-crm-triage-readiness
+    primary: true
+    steps:
+      - name: load-local-crm-analytics
+        command: analytics
+        mode: local
+      - name: find-followup-gaps
+        command: agent-crm followup-gaps --db local
+        mode: local
+        expect_fields:
+          - items
+      - name: measure-speed-to-lead
+        command: agent-crm speed-to-lead --db local
+        mode: local
+        expect_fields:
+          - items
+      - name: check-crm-data-quality
+        command: agent-crm data-quality --db local
+        mode: local
+        expect_fields:
+          - items
+      - name: produce-next-actions
+        command: agent-crm next-actions --db local
+        mode: local
+        expect_fields:
+          - items
