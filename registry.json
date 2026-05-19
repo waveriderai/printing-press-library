@@ -181,6 +181,30 @@
       }
     },
     {
+      "name": "anylist",
+      "category": "food-and-dining",
+      "api": "AnyList",
+      "description": "Every AnyList feature in your terminal — plus offline search, store routing, and cron-safe automations no mobile...",
+      "path": "library/food-and-dining/anylist",
+      "printer": "jeeves",
+      "printer_name": "Jeeves",
+      "mcp": {
+        "binary": "anylist-pp-mcp",
+        "transports": [
+          "stdio",
+          "http"
+        ],
+        "tool_count": 43,
+        "public_tool_count": 0,
+        "auth_type": "bearer_token",
+        "env_vars": [
+          "ANYLIST_ACCESS_TOKEN"
+        ],
+        "mcp_ready": "full",
+        "spec_format": "internal"
+      }
+    },
+    {
       "name": "apartments",
       "category": "other",
       "api": "Apartments",
