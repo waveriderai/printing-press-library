@@ -1,7 +1,7 @@
 {
   "schema_version": 1,
   "generated_at": "2026-05-14T02:43:15.768984Z",
-  "printing_press_version": "4.5.1",
+  "printing_press_version": "4.10.0",
   "api_name": "openart",
   "display_name": "OpenArt",
   "cli_name": "openart-pp-cli",
