@@ -1,0 +1,17 @@
+{
+  "schema_version": 2,
+  "id": "podcast-clip",
+  "applied_at": "2026-06-03",
+  "base_run_id": "20260513T152516Z-e836a3fe",
+  "base_printing_press_version": "4.5.2",
+  "summary": "Add `podcast clip`: transcript-window scoring and ffmpeg extraction for short-form podcast clips.",
+  "reason": "ElevenLabs provides transcription primitives but no viral-clip extractor; this hand-authored workflow scores transcript windows and cuts durable clip artifacts locally.",
+  "files": [
+    "internal/cli/podcast.go",
+    "internal/cli/podcast_clip.go",
+    "internal/cli/podcast_test.go",
+    ".printing-press.json",
+    "SKILL.md"
+  ],
+  "validated_outcome": "go build ./...; go vet ./...; go test ./...; govulncheck ./...; python3 .github/scripts/verify-skill/verify_skill.py --dir library/ai/elevenlabs/"
+}

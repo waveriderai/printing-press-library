@@ -93,6 +93,13 @@ These capabilities aren't available in any other tool for this API.
   ```bash
   elevenlabs-pp-cli podcast seo --audio episode.mp3 --title-seed "deep work" --keywords "productivity,attention,focus" --out ./seo --agent
   ```
+- **`podcast clip`** - Score transcript windows for hook, flow, and value, then cut and caption the top clips as audio or multi-aspect video assets.
+
+  _Agents can turn one episode into short-form distribution assets with ranked windows and reproducible ffmpeg cut commands._
+
+  ```bash
+  elevenlabs-pp-cli podcast clip --audio episode.mp3 --count 5 --aspect 9:16,1:1,16:9 --out ./clips --agent
+  ```
 
 ## Command Reference
 
@@ -265,6 +272,7 @@ These capabilities aren't available in any other tool for this API.
 - `elevenlabs-pp-cli podcast produce` — Turn an annotated podcast script into a mixed episode
 - `elevenlabs-pp-cli podcast master` — De-noise and loudness-normalize a finished podcast episode
 - `elevenlabs-pp-cli podcast seo` — Create transcript, chapters, and SEO assets for an episode
+- `elevenlabs-pp-cli podcast clip` — Score and cut short-form podcast clips
 
 **dubbing** — Manage dubbing
 

@@ -62,6 +62,11 @@
       "name": "Podcast SEO Package",
       "command": "podcast seo",
       "description": "Turn a finished episode into an SEO/GEO discovery package: transcript, SRT/VTT, Apple-compatible chapters, keyword-targeted show notes, A/B title variants, and pull-quotes, with forced-alignment when a script is known or speech-to-text when only audio is available."
+    },
+    {
+      "name": "Podcast Clip Extractor",
+      "command": "podcast clip",
+      "description": "Score an episode's transcript windows for short-form potential (hook/flow/value), then cut and caption the top N as audio or multi-aspect video clips for TikTok/Reels/Shorts. Requires local ffmpeg."
     }
   ]
 }

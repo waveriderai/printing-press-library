@@ -167,3 +167,24 @@ func TestBlocksToSRT(t *testing.T) {
 		}
 	}
 }
+
+func TestScorePodcastClipCandidates(t *testing.T) {
+	transcript := "Why does focus disappear so quickly? The practical lesson is that teams need a framework because attention is fragile. This is short."
+	candidates := scorePodcastClipCandidates(transcript, 45)
+	if len(candidates) < 2 {
+		t.Fatalf("candidates = %d", len(candidates))
+	}
+	if candidates[0].Score < candidates[1].Score {
+		t.Fatalf("candidates not sorted: %+v", candidates)
+	}
+	selected := selectPodcastClips(candidates, 1, 60)
+	if len(selected) != 1 {
+		t.Fatalf("selected = %d", len(selected))
+	}
+}
+
+func TestAspectSuffix(t *testing.T) {
+	if got := aspectSuffix("9:16"); got != "9x16" {
+		t.Fatalf("aspect suffix = %q", got)
+	}
+}
