@@ -1,6 +1,6 @@
 ---
 name: pp-x-twitter
-description: "The only X CLI with an offline Trigger phrases: `search X for`, `archive tweets about`, `show me the X thread for`, `monitor my X mentions`, `post a thread to X`, `use x-twitter`, `run x-twitter-pp-cli`."
+description: "Offline-searchable X/Twitter CLI and MCP surface for archiving posts, resolving links, monitoring mentions, composing threads, publishing Articles, and searching synced bookmarks. Trigger phrases: `search X for`, `archive tweets about`, `show me the X thread for`, `monitor my X mentions`, `post a thread to X`, `use x-twitter`, `run x-twitter-pp-cli`."
 author: "Cathryn Lavery"
 license: "Apache-2.0"
 argument-hint: "<command> [args] | install cli|mcp"
@@ -226,9 +226,6 @@ These capabilities aren't available in any other tool for this API.
 
 - `x-twitter-pp-cli insights get-historical` — Retrieves historical engagement metrics for specified Posts within a defined time range.
 - `x-twitter-pp-cli insights get-insights28-hr` — Retrieves engagement metrics for specified Posts over the last 28 hours.
-
-**likes** — Manage likes
-
 
 **lists** — Endpoints related to retrieving, managing Lists
 
