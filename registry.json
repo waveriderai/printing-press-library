@@ -1230,6 +1230,12 @@
         "handle": "hnshah",
         "name": "Hiten Shah"
       },
+      "contributors": [
+        {
+          "handle": "sdhilip200",
+          "name": "Dhilip Subramanian"
+        }
+      ],
       "mcp": {
         "binary": "arxiv-pp-mcp",
         "transports": [
