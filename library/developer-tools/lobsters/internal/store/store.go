@@ -998,7 +998,14 @@ func (s *Store) UpsertT(data json.RawMessage) error {
 // Includes both flat resources and dependent (parent-child) resources so a
 // child path-item annotated with x-resource-id resolves the same as a flat
 // path-item.
-var resourceIDFieldOverrides = map[string]string{}
+var resourceIDFieldOverrides = map[string]string{
+	"hottest-json": "short_id",
+	"hottest_json": "short_id",
+	"newest":       "short_id",
+	"page":         "short_id",
+	"s":            "short_id",
+	"t":            "tag",
+}
 
 // genericIDFieldFallbacks is the runtime safety net for resources that did
 // NOT receive a templated IDField. API-specific names belong in spec
@@ -1027,6 +1034,7 @@ func (s *Store) UpsertBatch(resourceType string, items []json.RawMessage) (int, 
 	}
 	defer tx.Rollback()
 
+	typedResourceType := typedResourceTypeFor(resourceType)
 	var stored, skippedCount, extractFailures int
 	for _, item := range items {
 		var obj map[string]any
@@ -1068,7 +1076,7 @@ func (s *Store) UpsertBatch(resourceType string, items []json.RawMessage) (int, 
 			return 0, extractFailures, fmt.Errorf("upserting %s/%s: %w", resourceType, id, err)
 		}
 
-		switch resourceType {
+		switch typedResourceType {
 		case "hottest_json":
 			if err := s.upsertHottestJsonTx(tx, id, obj, item); err != nil {
 				return 0, extractFailures, fmt.Errorf("typed upsert for %s/%s: %w", resourceType, id, err)
@@ -1103,6 +1111,15 @@ func (s *Store) UpsertBatch(resourceType string, items []json.RawMessage) (int, 
 		return 0, extractFailures, err
 	}
 	return stored, extractFailures, nil
+}
+
+func typedResourceTypeFor(resourceType string) string {
+	switch resourceType {
+	case "hottest-json":
+		return "hottest_json"
+	default:
+		return resourceType
+	}
 }
 
 func (s *Store) SaveSyncState(resourceType, cursor string, count int) error {

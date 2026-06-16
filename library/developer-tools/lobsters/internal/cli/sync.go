@@ -753,7 +753,7 @@ func upsertSingleObject(db *store.Store, resource string, data json.RawMessage) 
 	}
 
 	switch resource {
-	case "hottest_json":
+	case "hottest-json", "hottest_json":
 		return db.UpsertHottestJson(data)
 	case "newest":
 		return db.UpsertNewest(data)
@@ -825,7 +825,14 @@ func syncResourcePath(resource string) (string, error) {
 // Includes both flat resources and dependent (parent-child) resources so
 // annotations on a child path-item are honored at runtime, not just on
 // flat paths.
-var resourceIDFieldOverrides = map[string]string{}
+var resourceIDFieldOverrides = map[string]string{
+	"hottest-json": "short_id",
+	"hottest_json": "short_id",
+	"newest":       "short_id",
+	"page":         "short_id",
+	"s":            "short_id",
+	"t":            "tag",
+}
 
 // genericIDFieldFallbacks is the runtime safety net for resources that did
 // NOT receive a templated IDField. API-specific names belong in spec

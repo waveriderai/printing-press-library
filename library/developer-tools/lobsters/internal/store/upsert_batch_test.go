@@ -258,11 +258,9 @@ func TestUpsertBatch_ExtractFailuresReturnedForPerItemMisses(t *testing.T) {
 	}
 }
 
-// TestUpsertBatch_PopulatesHottestJsonTable verifies that UpsertBatch
-// dispatches paginated items into both the generic resources table AND the
-// typed hottest_json table. Regression for issue #268: before the fix, paginated
-// syncs only filled the generic resources table, so domain commands that
-// query the typed table saw zero rows.
+// TestUpsertBatch_PopulatesHottestJsonTable verifies that the production sync
+// resource name dispatches into both the generic resources table AND the typed
+// hottest_json table while extracting Lobsters' short_id primary key.
 func TestUpsertBatch_PopulatesHottestJsonTable(t *testing.T) {
 	dbPath := filepath.Join(t.TempDir(), "data.db")
 	s, err := Open(dbPath)
@@ -272,18 +270,25 @@ func TestUpsertBatch_PopulatesHottestJsonTable(t *testing.T) {
 	defer s.Close()
 
 	items := []json.RawMessage{
-		json.RawMessage(`{"id": "test-001"}`),
-		json.RawMessage(`{"id": "test-002"}`),
-		json.RawMessage(`{"id": "test-003"}`),
+		json.RawMessage(`{"short_id": "test-001", "title": "one"}`),
+		json.RawMessage(`{"short_id": "test-002", "title": "two"}`),
+		json.RawMessage(`{"short_id": "test-003", "title": "three"}`),
 	}
-	if _, _, err := s.UpsertBatch("hottest_json", items); err != nil {
+	stored, extractFailures, err := s.UpsertBatch("hottest-json", items)
+	if err != nil {
 		t.Fatalf("UpsertBatch: %v", err)
+	}
+	if stored != len(items) {
+		t.Fatalf("stored = %d, want %d", stored, len(items))
+	}
+	if extractFailures != 0 {
+		t.Fatalf("extractFailures = %d, want 0", extractFailures)
 	}
 
 	db := s.DB()
 
 	var generic int
-	if err := db.QueryRow(`SELECT COUNT(*) FROM resources WHERE resource_type = ?`, "hottest_json").Scan(&generic); err != nil {
+	if err := db.QueryRow(`SELECT COUNT(*) FROM resources WHERE resource_type = ?`, "hottest-json").Scan(&generic); err != nil {
 		t.Fatalf("count resources: %v", err)
 	}
 	if generic != len(items) {
