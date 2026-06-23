@@ -626,13 +626,21 @@ func (c *Client) doInternal(ctx context.Context, method, path string, params map
 		// Success
 		if resp.StatusCode < 400 {
 			c.limiter.OnSuccess()
-			// Expensify replies HTTP 200 with the real status in a jsonCode field.
-			// jsonCode 407 means the session token expired; surface it as an auth
-			// error so callers don't treat the empty payload as a successful no-op
-			// (e.g. sync silently reporting "Synced 0").
-			if code, msg := embeddedJSONCode(respBody); code == 407 {
-				if msg == "" {
+			// Expensify replies HTTP 200 with the REAL status in a jsonCode field
+			// (200 = ok, 407 = session expired, 400/403/666/... = application-level
+			// errors). A 2xx HTTP status alone is not success, so surface any
+			// jsonCode >= 400 as an error — otherwise mutating commands print a
+			// false "Created expense…" when Expensify actually rejected the request
+			// (bad policyID, missing permission), and sync silently reports
+			// "Synced 0" on an expired session.
+			if code, msg := embeddedJSONCode(respBody); code >= 400 {
+				switch {
+				case msg != "":
+					// use the server-provided message
+				case code == 407:
 					msg = "session expired — re-authenticate with `expensify-pp-cli auth login`"
+				default:
+					msg = fmt.Sprintf("Expensify returned jsonCode %d", code)
 				}
 				return nil, code, &APIError{Method: method, Path: c.displayURL(path, authHeader), StatusCode: code, Body: msg}
 			}
