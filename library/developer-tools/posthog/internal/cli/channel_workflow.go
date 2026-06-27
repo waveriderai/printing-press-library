@@ -6,6 +6,7 @@ package cli
 import (
 	"encoding/json"
 	"fmt"
+	"os"
 	"time"
 
 	"github.com/mvanhorn/printing-press-library/library/developer-tools/posthog/internal/store"
@@ -65,6 +66,15 @@ and full resync. After archiving, use 'search' for instant full-text search.`,
 				}
 			}
 
+			// syncResource streams NDJSON progress events directly to os.Stdout;
+			// archive routes its own progress to stderr and emits a single
+			// JSON/text summary, so redirect os.Stdout during the sync loop to
+			// keep stdout a single parseable document.
+			realStdout := os.Stdout
+			if devnull, derr := os.OpenFile(os.DevNull, os.O_WRONLY, 0); derr == nil {
+				os.Stdout = devnull
+				defer devnull.Close()
+			}
 			for _, resource := range resources {
 				res := syncResource(c, s, resource, "", full, 100, false, "", nil)
 				if res.Err != nil {
@@ -78,6 +88,7 @@ and full resync. After archiving, use 'search' for instant full-text search.`,
 				totalSynced += res.Count
 				fmt.Fprintf(cmd.ErrOrStderr(), "  %s: %d synced\n", resource, res.Count)
 			}
+			os.Stdout = realStdout
 
 			if flags.asJSON {
 				enc := json.NewEncoder(cmd.OutOrStdout())

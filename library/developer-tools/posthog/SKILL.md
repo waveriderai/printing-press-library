@@ -25,13 +25,15 @@ This skill drives the `posthog-pp-cli` binary. **You must verify the CLI is inst
 2. Verify: `posthog-pp-cli --version`
 3. Ensure the reported install directory is on `$PATH` for the agent/runtime that will invoke this skill.
 
-If the `npx` install fails (no Node, offline, etc.), fall back to a direct Go install (requires Go 1.26.4 or newer):
+If the `npx` install fails (no Node, offline, etc.), fall back to a direct Go install (requires Go 1.26.4 or newer). This installs into `$GOPATH/bin` (default `$HOME/go/bin`), so add that directory to `$PATH` instead:
 
 ```bash
 go install github.com/mvanhorn/printing-press-library/library/developer-tools/posthog/cmd/posthog-pp-cli@latest
 ```
 
 If `--version` reports "command not found" after install, the runtime cannot see the binary directory on `$PATH`. Do not proceed with skill commands until verification succeeds.
+
+posthog-pp-cli syncs your flags, insights, experiments, persons, errors, and LLM traces to a local SQLite store. Query anything offline, run compound analytics across resources the UI keeps separate, and pipe results directly to agents or scripts.
 
 ## When to Use This CLI
 
@@ -141,7 +143,6 @@ posthog-pp-cli which "<capability in your own words>"
 
 ## Recipes
 
-
 ### Find flags safe to archive
 
 ```bash
@@ -153,23 +154,23 @@ List flag keys with no evaluation events in 60 days — safe cleanup candidates
 ### Pre-ramp safety check
 
 ```bash
-posthog-pp-cli flags rollout-health --key new-checkout --window 48h --agent --select flag_key,error_rate_delta,metric_delta
+posthog-pp-cli flags rollout-health --key new-checkout --window 48h --agent
 ```
 
-Check error rate and purchase metric delta for flag-exposed users before ramping to 100%
+Check error-rate delta for flag-exposed users in the last 48h before ramping a flag to 100%
 
 ### Weekly experiment briefing
 
 ```bash
-posthog-pp-cli experiments pre-check --json | jq '.[] | {key, winner, significance, days_remaining}'
+posthog-pp-cli experiments pre-check --project 12345 --json | jq '.[] | select(.verdict == "needs_traffic")'
 ```
 
-Cross-experiment pre-check summary for Monday standup — surface experiments needing traffic adjustment
+Surface experiments that will not reach significance this sprint unless you add traffic
 
 ### LLM cost by flag variant
 
 ```bash
-posthog-pp-cli llm cost-attribution --flag model-tier --days 30 --agent --select variant,total_cost_usd,avg_cost_per_call
+posthog-pp-cli llm cost-attribution --flag model-tier --since 7d --agent
 ```
 
 Compare LLM spend across A/B variants to decide if GPT-4o outperforms GPT-4o-mini in your context

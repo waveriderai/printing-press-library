@@ -46,11 +46,20 @@ Each line is a JSON object. Use 'sync' first to populate the local store.`,
 			if outputFile == "" || outputFile == "-" {
 				out = os.Stdout
 			} else {
+				// #nosec G304 -- outputFile is a user-chosen destination on their own machine for their own export; path control is the intended behavior of an export command's --output flag.
 				out, err = os.Create(outputFile)
 				if err != nil {
 					return fmt.Errorf("creating output file: %w", err)
 				}
 				defer out.Close()
+			}
+
+			if len(items) == 0 && (outputFile == "" || outputFile == "-") {
+				// Emit a valid empty JSON value so --json consumers always
+				// receive parseable output, even when the local store is empty
+				// (e.g. before a sync). File exports stay empty JSONL.
+				fmt.Fprintln(out, "[]")
+				return nil
 			}
 
 			enc := json.NewEncoder(out)

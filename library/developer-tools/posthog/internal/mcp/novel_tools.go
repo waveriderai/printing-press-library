@@ -274,7 +274,7 @@ func handleFlagsStale(ctx context.Context, req mcplib.CallToolRequest) (*mcplib.
 	if json.Unmarshal(data, &resp) == nil {
 		rawItems = resp.Results
 	} else {
-		json.Unmarshal(data, &rawItems)
+		_ = json.Unmarshal(data, &rawItems) // best-effort fallback parse; the un-enveloped shape may not match, leaving rawItems empty
 	}
 
 	cutoff := time.Now().AddDate(0, 0, -days)
@@ -371,7 +371,7 @@ func handleDashboardHealth(ctx context.Context, req mcplib.CallToolRequest) (*mc
 	if json.Unmarshal(data, &resp) == nil {
 		rawItems = resp.Results
 	} else {
-		json.Unmarshal(data, &rawItems)
+		_ = json.Unmarshal(data, &rawItems) // best-effort fallback parse; the un-enveloped shape may not match, leaving rawItems empty
 	}
 
 	staleCutoff := time.Now().AddDate(0, 0, -staleDays)
@@ -520,7 +520,7 @@ func handleExperimentsPreCheck(ctx context.Context, req mcplib.CallToolRequest) 
 	if json.Unmarshal(data, &resp) == nil {
 		rawItems = resp.Results
 	} else {
-		json.Unmarshal(data, &rawItems)
+		_ = json.Unmarshal(data, &rawItems) // best-effort fallback parse; the un-enveloped shape may not match, leaving rawItems empty
 	}
 
 	type expCheck struct {
@@ -659,7 +659,7 @@ func handlePersonsAtRisk(ctx context.Context, req mcplib.CallToolRequest) (*mcpl
 	if json.Unmarshal(data, &resp) == nil {
 		rawPersons = resp.Results
 	} else {
-		json.Unmarshal(data, &rawPersons)
+		_ = json.Unmarshal(data, &rawPersons) // best-effort fallback parse; the un-enveloped shape may not match, leaving rawPersons empty
 	}
 
 	silentCutoff := time.Now().AddDate(0, 0, -silentDays)

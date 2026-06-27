@@ -1,4 +1,5 @@
 // Copyright 2026 riteshtiwari and contributors. Licensed under Apache-2.0. See LICENSE.
+// pp:data-source live
 
 package cli
 
@@ -102,7 +103,7 @@ func newPersonsAtRiskCmd(flags *rootFlags) *cobra.Command {
 					nextURL = resp.Next
 				} else {
 					var direct []json.RawMessage
-					json.Unmarshal(data, &direct) //nolint:errcheck
+					_ = json.Unmarshal(data, &direct)
 					rawPersons = append(rawPersons, direct...)
 					break
 				}

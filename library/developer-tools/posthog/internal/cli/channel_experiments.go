@@ -1,4 +1,5 @@
 // Copyright 2026 riteshtiwari and contributors. Licensed under Apache-2.0. See LICENSE.
+// pp:data-source live
 
 package cli
 
@@ -104,7 +105,7 @@ func newExperimentsPreCheckCmd(flags *rootFlags) *cobra.Command {
 					nextURL = resp.Next
 				} else {
 					var direct []json.RawMessage
-					json.Unmarshal(data, &direct) //nolint:errcheck
+					_ = json.Unmarshal(data, &direct)
 					rawItems = append(rawItems, direct...)
 					break
 				}
@@ -175,7 +176,7 @@ func renderExperimentsPreCheck(cmd *cobra.Command, flags *rootFlags, projectID s
 
 		// Extract participant count from the raw JSON more broadly.
 		var rawObj map[string]any
-		json.Unmarshal(raw, &rawObj)
+		_ = json.Unmarshal(raw, &rawObj)
 		participantCount := 0
 		for _, k := range []string{"exposure_count", "participant_count", "sample_size"} {
 			if v, ok := rawObj[k]; ok {

@@ -1,4 +1,5 @@
 // Copyright 2026 riteshtiwari and contributors. Licensed under Apache-2.0. See LICENSE.
+// pp:data-source live
 
 package cli
 
@@ -150,7 +151,7 @@ func newFlagsBlastRadiusCmd(flags *rootFlags) *cobra.Command {
 					var envelope struct {
 						Next string `json:"next"`
 					}
-					json.Unmarshal(data, &envelope) //nolint:errcheck
+					_ = json.Unmarshal(data, &envelope)
 					nextURL = envelope.Next
 				}
 			}
@@ -423,7 +424,7 @@ func newFlagsStaleCmd(flags *rootFlags) *cobra.Command {
 						if local, err3 := s.SearchFeatureFlags("", limit); err3 == nil && len(local) > 0 {
 							rawItems = local
 						}
-						s.Close()
+						_ = s.Close()
 					}
 				}
 			}
@@ -448,7 +449,7 @@ func newFlagsStaleCmd(flags *rootFlags) *cobra.Command {
 						nextURL = resp.Next
 					} else {
 						var direct []json.RawMessage
-						json.Unmarshal(data, &direct) //nolint:errcheck
+						_ = json.Unmarshal(data, &direct)
 						rawItems = append(rawItems, direct...)
 						break
 					}

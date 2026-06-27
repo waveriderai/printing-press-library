@@ -217,7 +217,7 @@
     "auth_narrative": "Uses your PostHog personal API key (phx_...). Set POSTHOG_API_KEY or run `posthog-pp-cli auth set-token`. Supports both US (app.posthog.com) and EU (eu.posthog.com) instances via POSTHOG_HOST.",
     "quickstart": [
       {
-        "command": "posthog-pp-cli auth set-token",
+        "command": "posthog-pp-cli auth set-token YOUR_TOKEN_HERE",
         "comment": "Connect to your PostHog instance with your personal API key"
       },
       {
@@ -225,22 +225,22 @@
         "comment": "Sync flags, insights, experiments, persons, and errors to local store"
       },
       {
-        "command": "posthog-pp-cli flags list --json",
+        "command": "posthog-pp-cli projects feature-flags list \u003cproject_id\u003e --json",
         "comment": "List all feature flags with rollout rules"
       },
       {
-        "command": "posthog-pp-cli query run --sql \"SELECT event, count() FROM events WHERE timestamp \u003e now() - INTERVAL 7 DAY GROUP BY event ORDER BY count() DESC LIMIT 20\"",
-        "comment": "Run HogQL to see your top events"
+        "command": "posthog-pp-cli search \"checkout\" --json",
+        "comment": "Full-text search across synced flags, insights, experiments, and persons — offline"
       },
       {
-        "command": "posthog-pp-cli flags blast-radius my-checkout-v2",
+        "command": "posthog-pp-cli flags blast-radius --key my-checkout-v2",
         "comment": "Find everything that references a flag before archiving"
       }
     ],
     "troubleshoots": [
       {
         "symptom": "401 Unauthorized",
-        "fix": "Run `posthog-pp-cli auth set-token` and paste your phx_ personal API key (not the project token)"
+        "fix": "Run `posthog-pp-cli auth set-token phx_YOUR_KEY` with your personal API key (not the project token)"
       },
       {
         "symptom": "Empty results after sync",
@@ -252,7 +252,7 @@
       },
       {
         "symptom": "Query rate limit (429)",
-        "fix": "PostHog limits analytics queries to 240/min. Add --delay 500 flag or reduce query frequency"
+        "fix": "PostHog limits analytics queries to 240/min. Add `--rate-limit 4` to cap request rate, or reduce query frequency"
       }
     ],
     "when_to_use": "Use posthog-pp-cli when an agent task requires querying, diffing, or combining PostHog data across more than one resource type — flag state vs error events, LLM costs vs variant performance, experiment exposure vs significance. It is faster than the web UI for bulk reads and produces structured JSON that agents can consume directly without parsing HTML.",
@@ -264,22 +264,22 @@
       },
       {
         "title": "Pre-ramp safety check",
-        "command": "posthog-pp-cli flags rollout-health new-checkout --metric purchase --error-event exception --window 48h --agent --select flag_key,error_rate_delta,metric_delta",
-        "explanation": "Check error rate and purchase metric delta for flag-exposed users before ramping to 100%"
+        "command": "posthog-pp-cli flags rollout-health --key new-checkout --window 48h --agent",
+        "explanation": "Check error-rate delta for flag-exposed users in the last 48h before ramping a flag to 100%"
       },
       {
         "title": "Weekly experiment briefing",
-        "command": "posthog-pp-cli experiments summary --status running --json | jq '.[] | {key, winner, significance, days_remaining}'",
-        "explanation": "Cross-experiment winner summary for Monday standup — only running experiments with significance scores"
+        "command": "posthog-pp-cli experiments pre-check --project 12345 --json | jq '.[] | select(.verdict == \"needs_traffic\")'",
+        "explanation": "Surface experiments that will not reach significance this sprint unless you add traffic"
       },
       {
         "title": "LLM cost by flag variant",
-        "command": "posthog-pp-cli llm cost-attribution --flag model-tier --days 30 --agent --select variant,total_cost_usd,avg_cost_per_call",
+        "command": "posthog-pp-cli llm cost-attribution --flag model-tier --since 7d --agent",
         "explanation": "Compare LLM spend across A/B variants to decide if GPT-4o outperforms GPT-4o-mini in your context"
       },
       {
         "title": "Dashboard audit before all-hands",
-        "command": "posthog-pp-cli dashboard health --warn-stale-days 7 --json | jq '.[] | select(.issues | length \u003e 0)'",
+        "command": "posthog-pp-cli dashboard health --stale-days 7 --json | jq '.[] | select(.issues | length \u003e 0)'",
         "explanation": "Surface dashboards with broken filters or stale data before a stakeholder presentation"
       }
     ],

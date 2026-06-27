@@ -4,8 +4,6 @@
 
 posthog-pp-cli syncs your flags, insights, experiments, persons, errors, and LLM traces to a local SQLite store. Query anything offline, run compound analytics across resources the UI keeps separate, and pipe results directly to agents or scripts.
 
-Created by [@riteshtiwari](https://github.com/riteshtiwari) (riteshtiwari).
-
 ## Install
 
 The recommended path installs both the `posthog-pp-cli` binary and the `pp-posthog` agent skill (Claude Code, Codex, Cursor, Gemini CLI, GitHub Copilot, and other agents supported by the upstream [`skills`](https://github.com/vercel-labs/skills) CLI) in one shot:
@@ -127,19 +125,19 @@ Uses your PostHog personal API key (phx_...). Set POSTHOG_API_KEY or run `postho
 
 ```bash
 # Connect to your PostHog instance with your personal API key
-posthog-pp-cli auth set-token
+posthog-pp-cli auth set-token YOUR_TOKEN_HERE
 
 # Sync flags, insights, experiments, persons, and errors to local store
 posthog-pp-cli sync --full
 
 # List all feature flags with rollout rules
-posthog-pp-cli flags list --json
+posthog-pp-cli projects feature-flags list <project_id> --json
 
-# Run HogQL to see your top events
-posthog-pp-cli query run --sql "SELECT event, count() FROM events WHERE timestamp > now() - INTERVAL 7 DAY GROUP BY event ORDER BY count() DESC LIMIT 20"
+# Full-text search across synced flags, insights, experiments, and persons — offline
+posthog-pp-cli search "checkout" --json
 
 # Find everything that references a flag before archiving
-posthog-pp-cli flags blast-radius my-checkout-v2
+posthog-pp-cli flags blast-radius --key my-checkout-v2
 
 ```
 
@@ -192,7 +190,7 @@ These capabilities aren't available in any other tool for this API.
   _Use after a deploy to catch silent schema changes that corrupt ongoing experiments and dashboards._
 
   ```bash
-  posthog-pp-cli events property-drift --event checkout_completed --agent
+  posthog-pp-cli events property-drift checkout_completed --agent
   ```
 - **`experiments pre-check`** — Know today whether an experiment will reach significance this sprint, or needs traffic adjustment now.
 
@@ -221,10 +219,10 @@ These compound commands exist nowhere else. Each wraps multiple API calls into a
 
 ```bash
 # Find every insight, dashboard, experiment, and survey referencing a flag
-posthog-pp-cli flags blast-radius my-flag --project 12345
+posthog-pp-cli flags blast-radius --key my-flag --project 12345
 
 # Go/no-go signal before ramping to 100%
-posthog-pp-cli flags rollout-health my-flag --project 12345
+posthog-pp-cli flags rollout-health --key my-flag --project 12345
 ```
 
 ### Quarterly flag cleanup
@@ -267,31 +265,21 @@ posthog-pp-cli llm cost-attribution --project 12345 --flag my-model-flag
 
 ## Commands
 
-### code
-
-Manage code
-
-- **`posthog-pp-cli code invites-check-access-retrieve`** - Check whether the authenticated user has access to PostHog Code.
-- **`posthog-pp-cli code invites-redeem-create`** - Redeem a PostHog Code invite code to enable access.
-
-### environments
-
-Manage environments
-
-### organizations
-
-Manage organizations
-
-- **`posthog-pp-cli organizations create`** - Create
-- **`posthog-pp-cli organizations destroy`** - Destroy
-- **`posthog-pp-cli organizations list`** - List
-- **`posthog-pp-cli organizations partial-update`** - Partial update
-- **`posthog-pp-cli organizations retrieve`** - Retrieve
-- **`posthog-pp-cli organizations update`** - Update
+> Run `posthog-pp-cli --help` for the full command list. Full CRUD over PostHog
+> resources lives under `posthog-pp-cli projects ...` (flags, insights,
+> experiments, dashboards, persons, cohorts, surveys, and more) and
+> `posthog-pp-cli users ...`.
 
 ### projects
 
-Manage projects
+Manage projects — feature flags, insights, experiments, dashboards, persons,
+cohorts, surveys, annotations, and every other project-scoped resource.
+
+```bash
+posthog-pp-cli projects feature-flags list <project_id>
+posthog-pp-cli projects insights list <project_id>
+posthog-pp-cli projects experiments list <project_id>
+```
 
 ### public-hog-function-templates
 
@@ -323,19 +311,19 @@ Manage users
 
 ```bash
 # Human-readable table (default in terminal, JSON when piped)
-posthog-pp-cli organizations list
+posthog-pp-cli users list
 
 # JSON for scripting and agents
-posthog-pp-cli organizations list --json
+posthog-pp-cli users list --json
 
 # Filter to specific fields
-posthog-pp-cli organizations list --json --select id,name,status
+posthog-pp-cli users list --json --select id,name,status
 
 # Dry run — show the request without sending
-posthog-pp-cli organizations list --dry-run
+posthog-pp-cli users list --dry-run
 
 # Agent mode — JSON + compact + no prompts in one flag
-posthog-pp-cli organizations list --agent
+posthog-pp-cli users list --agent
 ```
 
 ## Agent Usage
@@ -383,13 +371,10 @@ Environment variables:
 - Run the `list` command to see available items
 
 ### API-specific
-
-- **401 Unauthorized** — Run `posthog-pp-cli auth set-token` and paste your phx_ personal API key (not the project token)
+- **401 Unauthorized** — Run `posthog-pp-cli auth set-token phx_YOUR_KEY` with your personal API key (not the project token)
 - **Empty results after sync** — Check your project ID: `posthog-pp-cli projects list` — then set POSTHOG_PROJECT_ID
 - **EU instance not connecting** — Set POSTHOG_HOST=https://eu.posthog.com and re-run sync
-- **Query rate limit (429)** — PostHog limits analytics queries to 240/min. Add --delay 500 flag or reduce query frequency
-
----
+- **Query rate limit (429)** — PostHog limits analytics queries to 240/min. Add `--rate-limit 4` to cap request rate, or reduce query frequency
 
 ## Sources & Inspiration
 

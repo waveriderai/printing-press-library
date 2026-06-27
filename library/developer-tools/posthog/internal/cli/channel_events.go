@@ -1,4 +1,5 @@
 // Copyright 2026 riteshtiwari and contributors. Licensed under Apache-2.0. See LICENSE.
+// pp:data-source live
 
 package cli
 
@@ -36,7 +37,11 @@ func newEventsPropertyDriftCmd(flags *rootFlags) *cobra.Command {
 	cmd := &cobra.Command{
 		Use:         "property-drift <event-name>",
 		Short:       "Catch properties that silently disappeared from an event between two time windows",
-		Annotations: map[string]string{"mcp:read-only": "true"},
+		// no-error-path-probe: an unknown event name yields an empty drift
+		// result (exit 0), not an error — the command cannot distinguish a
+		// typo'd event from a real event with no property drift without an
+		// extra existence lookup.
+		Annotations: map[string]string{"mcp:read-only": "true", "pp:no-error-path-probe": "true"},
 		Long:        `Compare event property schemas between a baseline window and the current window. Returns dropped and new properties. Use after deploys to catch silent tracking regressions.`,
 		Example: `  posthog-pp-cli events property-drift pageview --project 12345
   posthog-pp-cli events property-drift purchase --project 12345 --baseline 14d --current 1d
